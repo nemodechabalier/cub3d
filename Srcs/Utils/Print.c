@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   Print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/12 11:43:22 by clmanouk          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2024/11/12 15:28:23 by clmanouk         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-# include "../Includes/cub3d.h"
-=======
+/*   Created: 2024/11/12 16:50:27 by nde-chab          #+#    #+#             */
 /*   Updated: 2024/11/12 17:37:35 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/cub3d.h"
->>>>>>> Stashed changes
 
-int	main(int ac, char **av)
+void print_strs(char **strs)
 {
-	if (ac != 2)
-		return (printf("wrong nb args\n"), -1);
-	test(av[1]);
-	return (0);
+	int i ; 
+	i = 0;
+	while (strs[i])
+	{
+		printf("%s\n", strs[i]);
+		i++;
+	}
 }

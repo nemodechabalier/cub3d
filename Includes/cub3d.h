@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:45:42 by clmanouk          #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2024/11/12 17:41:19 by clmanouk         ###   ########.fr       */
+=======
+/*   Updated: 2024/11/12 16:00:09 by nde-chab         ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +20,7 @@
 # include "../libft_all/ft_printf/ft_printf.h"
 # include "../libft_all/get_next_line/get_next_line.h"
 # include "../libft_all/libtf/libft.h"
-# include "mlx_linux/mlx.h"
+//# include "../mlx_linux/mlx.h"
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -24,6 +28,7 @@
 # include <sys/wait.h>
 # include <unistd.h>
 # include <wayland-version.h>
+# include "parsing.h"
 
 # define FALSE 0
 # define TRUE 1
@@ -35,7 +40,19 @@
 # define RAD_TO_DEG (180.0 / M_PI) // pour convertir de radian a degres
 # define DEG_TO_RAD (M_PI / 180.0) // pour convertir de degres a radian
 
+<<<<<<< Updated upstream
 /*
+=======
+typedef struct s_img
+{
+	void		*img_ptr;
+	int 		length; // or width
+	int			height;
+}				t_img;
+
+typedef struct s_player
+{
+>>>>>>> Stashed changes
 	int			vector_pos[2];
 	int			vector_dir;
 	int			player_pos;
@@ -71,12 +88,20 @@ typedef struct s_dda
 
 typedef struct s_map
 {
+<<<<<<< Updated upstream
 	char			**grid;
 	int				hit;
 	int				length;
 	int				height;
 	t_player		player;
 }					t_map;
+=======
+	char		**grid;
+	int			hit;
+	t_player	player;
+	t_img		img;
+}				t_map;
+>>>>>>> Stashed changes
 
 typedef struct s_game
 {
