@@ -17,6 +17,7 @@ OBJS = $(patsubst $(SRCS_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 # Compiler and flags
 CC = cc
 CFLAGS = -g3 -Wall -Wextra -Werror -I$(INCLUDES_DIR)
+LDFLAGS = -lm
 
 # Main executable
 NAME = cub3d
@@ -25,7 +26,7 @@ NAME = cub3d
 all: $(NAME)
 
 $(NAME): $(LIBFT_LIB) $(MLX_LIB_LINUX) $(MLX_LIB) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(MLX_LIB_LINUX) $(MLX_LIB) -o $(NAME)
+	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) $(LIBFT_LIB) $(MLX_LIB_LINUX) $(MLX_LIB) -o $(NAME)
 
 # Rule to create .o files and ensure directory structure in obj/
 $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c

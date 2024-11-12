@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:45:42 by clmanouk          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2024/11/12 17:41:19 by clmanouk         ###   ########.fr       */
-=======
-/*   Updated: 2024/11/12 16:00:09 by nde-chab         ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2024/11/12 18:42:49 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +36,8 @@
 # define RAD_TO_DEG (180.0 / M_PI) // pour convertir de radian a degres
 # define DEG_TO_RAD (M_PI / 180.0) // pour convertir de degres a radian
 
-<<<<<<< Updated upstream
-/*
-=======
+typedef struct s_calcul_table	t_calcul_table;
+
 typedef struct s_img
 {
 	void		*img_ptr;
@@ -50,15 +45,6 @@ typedef struct s_img
 	int			height;
 }				t_img;
 
-typedef struct s_player
-{
->>>>>>> Stashed changes
-	int			vector_pos[2];
-	int			vector_dir;
-	int			player_pos;
-	int *player_dir; // pr WESN du player
-	a rajouter peut-etre au player
-*/
 typedef struct s_player
 {
 	int				x;
@@ -88,20 +74,11 @@ typedef struct s_dda
 
 typedef struct s_map
 {
-<<<<<<< Updated upstream
-	char			**grid;
-	int				hit;
-	int				length;
-	int				height;
-	t_player		player;
-}					t_map;
-=======
 	char		**grid;
 	int			hit;
 	t_player	player;
 	t_img		img;
 }				t_map;
->>>>>>> Stashed changes
 
 typedef struct s_game
 {
@@ -119,7 +96,5 @@ typedef struct s_calcul_table
 	float			*calcul_angle_fov;
 }					t_calcul_table;
 
-int					get_map(t_map *map, const char *filename);
-char				**ft_realloc_map(t_map *map);
 
 #endif

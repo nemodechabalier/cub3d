@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:43:22 by clmanouk          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2024/11/12 15:28:23 by clmanouk         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-# include "../Includes/cub3d.h"
-=======
-/*   Updated: 2024/11/12 17:37:35 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/11/12 18:40:41 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/cub3d.h"
->>>>>>> Stashed changes
 
 int	main(int ac, char **av)
 {

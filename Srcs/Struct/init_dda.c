@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:47:22 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/12 17:41:44 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/11/12 18:59:17 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ Sinon, on calcule la valeur absolue de l'inverse de la composante correspondante
 
 */
 
-void	init_dda(t_player *player, t_dda *dda, t_calcul_table *table)
+void	init_dda(t_dda *dda, t_calcul_table *table, t_player *player)
 {
+	(void)table;
 	dda->map_x = player->x;
 	dda->map_y = player->y;
 	dda->ray_dir_x = cos(player->angle * DEG_TO_RAD);
