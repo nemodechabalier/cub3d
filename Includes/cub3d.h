@@ -6,7 +6,7 @@
 /*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:45:42 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/12 19:32:52 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:45:47 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,7 @@ typedef struct s_map
 	int				height;
 	t_player		player;
 }					t_map;
-	char		**grid;
-	int			hit;
-	t_player	player;
-	t_img		img;
-}				t_map;
+
 
 typedef struct s_game
 {
