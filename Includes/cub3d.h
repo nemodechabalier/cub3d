@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:45:42 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/12 18:42:49 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:32:52 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,16 @@
 # define TABLE_SIZE 360            // Précision en degrés pour un cercle complet
 # define RAD_TO_DEG (180.0 / M_PI) // pour convertir de radian a degres
 # define DEG_TO_RAD (M_PI / 180.0) // pour convertir de degres a radian
+
+/*
+	int			vector_pos[2];
+	int			vector_dir;
+	int			player_pos;
+	int *player_dir; // pr WESN du player
+	a rajouter peut-etre au player
+*/
+
+typedef struct s_calcul_table t_calcul_table;
 
 typedef struct s_calcul_table	t_calcul_table;
 
@@ -74,6 +84,12 @@ typedef struct s_dda
 
 typedef struct s_map
 {
+	char			**grid;
+	int				hit;
+	int				length;
+	int				height;
+	t_player		player;
+}					t_map;
 	char		**grid;
 	int			hit;
 	t_player	player;
@@ -96,5 +112,7 @@ typedef struct s_calcul_table
 	float			*calcul_angle_fov;
 }					t_calcul_table;
 
+//int					get_map(t_map *map, const char *filename);
+//char				**ft_realloc_map(t_map *map);
 
 #endif

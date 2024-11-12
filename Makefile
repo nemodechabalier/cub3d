@@ -26,7 +26,7 @@ NAME = cub3d
 all: $(NAME)
 
 $(NAME): $(LIBFT_LIB) $(MLX_LIB_LINUX) $(MLX_LIB) $(OBJS)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) $(LIBFT_LIB) $(MLX_LIB_LINUX) $(MLX_LIB) -o $(NAME)
+	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) $(LIBFT_LIB) $(MLX_LIB_LINUX) $(MLX_LIB) -lm -o $(NAME)
 
 # Rule to create .o files and ensure directory structure in obj/
 $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c

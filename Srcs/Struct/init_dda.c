@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_dda.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:47:22 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/12 18:59:17 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:31:38 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ Sinon, on calcule la valeur absolue de l'inverse de la composante correspondante
 
 void	init_dda(t_dda *dda, t_calcul_table *table, t_player *player)
 {
+	(void)table;
 	(void)table;
 	dda->map_x = player->x;
 	dda->map_y = player->y;

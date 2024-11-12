@@ -6,7 +6,7 @@
 /*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:41:28 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/11/12 18:04:46 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/11/12 18:48:27 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ typedef struct s_file
 void		free_strs(char **strs);
 void		print_strs(char **strs);
 
-void		test(char *file_name);
+t_file		*test(char *file_name);
 
 #endif
