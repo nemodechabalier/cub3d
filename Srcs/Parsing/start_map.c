@@ -6,11 +6,11 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 12:26:52 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/12 12:30:52 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:21:58 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "cub3d.h"
+# include "../Includes/cub3d.h"
 
 char	**ft_realloc_map(t_map *map)
 {
@@ -18,8 +18,8 @@ char	**ft_realloc_map(t_map *map)
 	char	**strs;
 
 	i = 0;
-	map->data.height *= 2;
-	strs = ft_calloc(sizeof(char *), map->data.height);
+	map->height *= 2;
+	strs = ft_calloc(sizeof(char *), map->height);
 	if (!strs)
 		return (NULL);
 	while (map->grid[i] != NULL)
@@ -53,7 +53,7 @@ int	get_map(t_map *map, const char *filename)
 	{
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
-		if (row >= map->data.height - 1)
+		if (row >= map->height - 1)
 			map->grid = ft_realloc_map(map);
 		map->grid[row] = line;
 		row++;

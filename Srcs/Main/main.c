@@ -6,11 +6,11 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:43:22 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/12 11:43:44 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/11/12 15:28:23 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "cub3d.h"
+# include "../Includes/cub3d.h"
 
 /*
 
