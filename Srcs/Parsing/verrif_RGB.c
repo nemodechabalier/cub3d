@@ -1,21 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   verrif_RGB.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/12 11:43:22 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/13 16:10:03 by nde-chab         ###   ########.fr       */
+/*   Created: 2024/11/13 19:02:46 by nde-chab          #+#    #+#             */
+/*   Updated: 2024/11/13 19:09:00 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/cub3d.h"
 
-int	main(int ac, char **av)
+char	*RGB_alloc(char *str)
 {
-	if (ac != 2)
-		return (printf("wrong nb args\n"), -1);
-	take_file(av[1]);
-	return (0);
+	int		i;
+	int		j;
+	char	*new;
+
+	i = 0;
+	j = 0;
+	new = ft_calloc(sizeof(char), count_alloc_texture(str) + 2);
+	if (!new)
+		return (NULL);
+	while(i < 4 && str[i])
+		new[j++] = str[i++];
+	while (str[1])
+}
+
+int	RGB_cut(t_file *file)
+{
+	int	i;
+
+	i = 0;
 }

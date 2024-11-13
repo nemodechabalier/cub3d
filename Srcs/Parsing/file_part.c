@@ -6,7 +6,7 @@
 /*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:48:14 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/11/12 18:56:04 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/11/13 16:10:41 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	**read_file(char *file_name, int nb_line)
 	return (file);
 }
 
-t_file	*test(char *file_name)
+t_file	*take_file(char *file_name)
 {
 	char	**strs;
 	int		nb_line;
@@ -91,9 +91,5 @@ t_file	*test(char *file_name)
 	if (!strs)
 		return (printf("strs == NULL\n"), NULL);
 	else
-	{
-		print_strs(strs);
-		free_strs(strs);
-		return (NULL);
-	}
+		return(cut_file(strs));
 }
