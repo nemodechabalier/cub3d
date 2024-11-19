@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:41:28 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/11/13 18:41:54 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/11/18 15:09:39 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 # define PARSING_H
 
 # include "cub3d.h"
+
+typedef struct s_calcul_table	t_calcul_table;
+typedef struct s_dda			t_dda;
+typedef struct s_game			t_game;
+typedef struct s_img			t_img;
 
 typedef struct s_file
 {

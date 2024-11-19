@@ -7,9 +7,10 @@ OBJ_DIR = obj
 
 # Libraries
 LIBFT_LIB = $(LIBFT_DIR)/libft_printf_gnl.a
-MLX_LIB_LINUX = $(MLX_DIR)/libmlx_Linux.a
-MLX_LIB = $(MLX_DIR)/libmlx.a
-
+MLX_LIB_LINUX = $(MLX_DIR)/libmlx.a
+MLX_DIR = mlx_linux/
+MLX_NAME = libmlx.a
+MLX_LIBS = -L$(MLX_DIR)/libmlx.a -lmlx -lXext -lX11 -lm -lz
 # Files
 SRCS = $(shell find $(SRCS_DIR) -name "*.c")
 OBJS = $(patsubst $(SRCS_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
@@ -17,7 +18,7 @@ OBJS = $(patsubst $(SRCS_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 # Compiler and flags
 CC = cc
 CFLAGS = -g3 -Wall -Wextra -Werror -I$(INCLUDES_DIR)
-LDFLAGS = -lm
+LDFLAGS = -lm -Lmlx_linux -lmlx -lXext -lX11 -lXrandr -lXrender -lz -lXcursor -lXinerama -lXft -DENVIRONMENT 
 
 # Main executable
 NAME = cub3d
@@ -25,8 +26,8 @@ NAME = cub3d
 # Rules
 all: $(NAME)
 
-$(NAME): $(LIBFT_LIB) $(MLX_LIB_LINUX) $(MLX_LIB) $(OBJS)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) $(LIBFT_LIB) $(MLX_LIB_LINUX) $(MLX_LIB) -lm -o $(NAME)
+$(NAME): $(LIBFT_LIB) $(MLX_LIB_LINUX) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(MLX_LIB_LINUX) $(LDFLAGS) -o $(NAME)
 
 # Rule to create .o files and ensure directory structure in obj/
 $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c

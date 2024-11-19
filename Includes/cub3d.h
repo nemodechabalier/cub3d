@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:45:42 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/12 19:45:47 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/11/19 18:55:43 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include "../libft_all/ft_printf/ft_printf.h"
 # include "../libft_all/get_next_line/get_next_line.h"
 # include "../libft_all/libtf/libft.h"
-//# include "../mlx_linux/mlx.h"
+# include "../mlx_linux/mlx.h"
+# include "parsing.h"
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -24,7 +25,6 @@
 # include <sys/wait.h>
 # include <unistd.h>
 # include <wayland-version.h>
-# include "parsing.h"
 
 # define FALSE 0
 # define TRUE 1
@@ -32,83 +32,98 @@
 # define SUCCESS 2
 // pour les calculs
 # define M_PI 3.14159265358979323846
-# define TABLE_SIZE 360            // Précision en degrés pour un cercle complet
+# define TABLE_SIZE 360   // Précision en degrés pour un cercle complet
+# define SCREEN_WIDTH 800 // Largeur ecran en pixels
+# define SCREEN_HEIGHT 600
+# define FOV_HORIZONTAL 60
+# define FOV_VERTICAL 45
 # define RAD_TO_DEG (180.0 / M_PI) // pour convertir de radian a degres
 # define DEG_TO_RAD (M_PI / 180.0) // pour convertir de degres a radian
 
-/*
-	int			vector_pos[2];
-	int			vector_dir;
-	int			player_pos;
-	int *player_dir; // pr WESN du player
-	a rajouter peut-etre au player
-*/
-
-typedef struct s_calcul_table t_calcul_table;
-
 typedef struct s_calcul_table	t_calcul_table;
+typedef struct s_dda			t_dda;
+typedef struct s_game			t_game;
+typedef struct s_img			t_img;
 
 typedef struct s_img
 {
-	void		*img_ptr;
-	int 		length; // or width
-	int			height;
-}				t_img;
+	void						*img_ptr;
+	int							length;
+	int							height;
+}								t_img;
 
 typedef struct s_player
 {
-	int				x;
-	int				y;
-	int				angle;
-	int				fov;
-	int				*player_dir;
-	t_calcul_table	*table;
-}					t_player;
+	float						pos_x;
+	float						pos_y;
+	float						angle;
+	float						dir_x;
+	float						dir_y;
+	float						plane_x;
+	float						plane_y;
+	double						fov;
+	double						*camera_x;
+	t_calcul_table				*table;
+	t_dda						*dda;
+}								t_player;
 
 typedef struct s_dda
 {
-	int				map_x;
-	int				map_y;
-	double 			ray_dir_x;
-	double			ray_dir_y;
-	float			side_dist_x;
-	float			side_dist_y;
-	double			delta_dist_x;
-	double			delta_dist_y;
-	int				step_x;
-	int				step_y;
-	int				hit;
-	float			perp_wall_dist;
-	t_player		*player;
-}					t_dda;
-
-typedef struct s_map
-{
-	char			**grid;
-	int				hit;
-	int				length;
-	int				height;
-	t_player		player;
-}					t_map;
-
+	int							map_x;
+	int							map_y;
+	float						ray_dir_x;
+	float						ray_dir_y;
+	float						side_dist_x;
+	float						side_dist_y;
+	float						delta_dist_x;
+	float						delta_dist_y;
+	int							step_x;
+	int							step_y;
+	int							hit;
+	float						perp_wall_dist;
+	t_player					*player;
+}								t_dda;
 
 typedef struct s_game
 {
-	void			*mlx;
-	void			*mlx_win;
+	void						*mlx;
+	void						*mlx_win;
+	t_img						img;
+}								t_game;
 
-}					t_game;
+typedef struct s_map
+{
+	char						**grid;
+	int							hit;
+	t_game						game;
+}								t_map;
 
 typedef struct s_calcul_table
 {
-	float			*sin;
-	float			*cos;
-	float			*tang;
-	float			*fish_eyes;
-	float			*calcul_angle_fov;
-}					t_calcul_table;
+	float						*sin;
+	float						*cos;
+	float						*tang;
+	float						*fish_eyes;
+}								t_calcul_table;
 
-//int					get_map(t_map *map, const char *filename);
-//char				**ft_realloc_map(t_map *map);
+// init
+int								ft_init_player(t_player *player,
+									t_calcul_table *table);
+t_dda							*ft_init_dda(t_player *player);
+t_calcul_table					*ft_init_calcul(t_player *player,
+									t_calcul_table *table);
+
+// dda
+int								start_algo_dda(t_dda *dda, t_file *file);
+
+// mlx
+int								mlx_init_first(t_map *map);
+void							draw_background(t_map *map);
+int								move_player(int keycode, t_player *player);
+
+t_map							*start_map(char **file);
+void							mlx_function_call(t_map *map, t_file *file);
+void							ft_free_map(char **map);
+int								close_window(t_map *map);
 
 #endif

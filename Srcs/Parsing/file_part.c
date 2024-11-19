@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_part.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:48:14 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/11/13 16:10:41 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:45:20 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	file_name_ok(char *str)
 		return (FALSE);
 	return (TRUE);
 }
+
 int	count_line(char *file_name)
 {
 	char	*line;

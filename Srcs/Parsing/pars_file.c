@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 17:44:16 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/11/13 17:31:08 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:01:57 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_file	*take_map(char **strs, t_file *file)
 	j = 0;
 	while (strs[save])
 		file->map[j++] = strs[save++];
+	print_strs(file->map);
 	return (file);
 }
 
@@ -108,5 +109,6 @@ t_file	*cut_file(char **strs)
 	file = take_map(strs, file);
 	if (!file)
 		return (free_strs(strs), NULL);
-	return (verrif_texture(file, strs));
+	//return (verrif_texture(file, strs));
+	return (file);
 }
