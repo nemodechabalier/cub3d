@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:41:28 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/11/18 15:09:39 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/11/19 19:07:08 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_file
 t_file		*cut_file(char **strs);
 t_file		*verrif_texture(t_file *file, char **strs);
 t_file		*take_file(char *file_name);
+int			map_verrif(t_file *file);
 
 // struct
 t_file		*t_file_creator(void);

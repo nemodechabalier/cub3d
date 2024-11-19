@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:45:42 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/19 18:55:43 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/11/19 19:06:28 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include "../libft_all/ft_printf/ft_printf.h"
 # include "../libft_all/get_next_line/get_next_line.h"
 # include "../libft_all/libtf/libft.h"
-# include "../mlx_linux/mlx.h"
 # include "parsing.h"
+# include "../mlx_linux/mlx.h"
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
