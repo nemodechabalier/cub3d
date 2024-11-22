@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 17:44:16 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/11/18 18:01:57 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/11/21 19:41:08 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_file	*take_map(char **strs, t_file *file)
 	j = 0;
 	while (strs[save])
 		file->map[j++] = strs[save++];
-	print_strs(file->map);
+	//print_strs(file->map);
 	return (file);
 }
 
