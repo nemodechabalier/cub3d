@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 10:59:14 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/22 16:15:58 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/11/23 12:44:52 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 t_map	*return_value_file(char **file)
 {
-	int		(i) = 0;
 	int		file_height;
-	int		line_length;
 	int		file_length;
 	t_map	*map;
 
+	int(i) = 0;
 	map = malloc(sizeof(t_map));
 	if (!map)
 		return (NULL);
@@ -31,9 +30,9 @@ t_map	*return_value_file(char **file)
 	file_length = 0;
 	while (i < file_height)
 	{
-		line_length = ft_strlen(file[i]);
-		if (line_length > file_length)
-			file_length = line_length;
+		map->line_length = ft_strlen(file[i]);
+		if (map->line_length > file_length)
+			file_length = map->line_length;
 		i++;
 	}
 	if (!copy_map(map, file, file_height, file_height))
@@ -43,7 +42,7 @@ t_map	*return_value_file(char **file)
 
 t_map	*copy_map(t_map *map, char **file, int file_height, int file_length)
 {
-	int		i;
+	int	i;
 
 	if (!file)
 		return (NULL);
@@ -63,6 +62,9 @@ t_map	*copy_map(t_map *map, char **file, int file_height, int file_length)
 	map->img_ptr = NULL;
 	map->height = file_height;
 	map->length = file_length;
+	map->addr = NULL;
+	map->bits_per_pixel = 0;
+	map->endian = 0;
 	map->game = ft_init_game_data();
 	return (map);
 }
@@ -83,6 +85,16 @@ t_game	*ft_init_game_data(void)
 	if (!table)
 		return (NULL);
 	game->table = ft_init_calcul(table);
+	if (!game->table)
+	{
+		ft_free_data(game);
+		return (NULL);
+	}
 	game->player = ft_init_player(table, player);
+	if (!game->player)
+	{
+		ft_free_data(game);
+		return (NULL);
+	}
 	return (game);
 }

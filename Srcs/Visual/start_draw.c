@@ -6,61 +6,75 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:54:52 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/22 19:00:14 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/11/23 13:21:20 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/cub3d.h"
 
-int	calculate_side(int side)
-{
-	if (side == 0)
-		return (0);
-	return (1);
-}
-
-void	draw_game(t_map *map, int side) 
+void	draw_game(t_map *map)
 {
 	int	x;
-	int	line;
 
 	x = 0;
+	draw_background(map);
 	while (x < SCREEN_WIDTH)
 	{
-		line = calculate_side(side);
-		draw_wall(map, x, line);
+		start_algo_dda(map, map->game->player, x);
+		draw_wall(map, x);
 		x++;
 	}
 }
 
-void	draw_background(t_map *map, int side)
+void	draw_wall(t_map *map, int x)
 {
-	int	half_screen;
-
-	int(x) = 0;
-	int(y) = 0;
-	half_screen = SCREEN_HEIGHT / 2;
-	while (x < half_screen)
+	int	line_height;
+	int	draw_start;
+	int	draw_end;
+	int	color;
+	int	y;
+	char *dest;
+	// le * 0.2 c'est une valeur de constante pour gerer les murs
+	line_height = (int)(SCREEN_HEIGHT / map->game->player->dda->perp_wall_dist * 0.2);
+	draw_start = -line_height / 2 + SCREEN_HEIGHT / 2;
+	if (draw_start < 0)
+		draw_start = 0;
+	draw_end = line_height / 2 + SCREEN_HEIGHT / 2;
+	if (draw_end >= SCREEN_HEIGHT)
+		draw_end = SCREEN_HEIGHT - 1;
+	color = 0x0080FF;
+	y = draw_start;
+	while (y < draw_end)
 	{
-		while (y < SCREEN_WIDTH)
-		{
-			mlx_pixel_put(map->game->mlx, map->game->mlx_win, x, y, 0x87CEEB);
-			y++;
-		}
-		x++;
-	}
-	y = half_screen;
-	while (y < SCREEN_HEIGHT)
-	{
-		y = 0;
-		while (y < SCREEN_HEIGHT)
-		{
-			mlx_pixel_put(map->game->mlx, map->game->mlx_win, x, y, 0xFF0000);
-			y++;
-		}
+		dest = map->addr + (y * map->line_length + x * (map->bits_per_pixel / 8));
+        *(unsigned int*)dest = color;
+		//mlx_pixel_put(map->game->mlx, map->game->mlx_win, x, y, color);
 		y++;
 	}
-	draw_game(map, side);
+}
+
+void draw_background(t_map *map)
+{
+    int x;
+	int y;
+    char *dst;
+    for (y = 0; y < SCREEN_HEIGHT / 2; y++)
+    {
+        for (x = 0; x < SCREEN_WIDTH; x++)
+        {
+            dst = map->addr + (y * map->line_length + x * (map->bits_per_pixel / 8));
+            *(unsigned int*)dst = 0x87CEEB;
+        }
+    }
+    
+    for (y = SCREEN_HEIGHT / 2; y < SCREEN_HEIGHT; y++)
+    {
+        for (x = 0; x < SCREEN_WIDTH; x++)
+        {
+            dst = map->addr + (y * map->line_length + x * (map->bits_per_pixel / 8));
+            *(unsigned int*)dst = 0xFF0000;
+        }
+    }
 }
 
 // les deux fonctions suivantes c'est pour afficher la map en petit si on veut

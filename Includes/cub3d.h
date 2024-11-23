@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:45:42 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/22 18:16:26 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/11/23 12:16:45 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@
 # define TABLE_SIZE 360
 # define SCREEN_WIDTH 800
 # define SCREEN_HEIGHT 600
-# define RAD_TO_DEG (180.0 / M_PI) // pour convertir de radian a degres
+//# define RAD_TO_DEG (180.0 / M_PI) // pour convertir de radian a degres
+# define RAD_TO_DEG (TABLE_SIZE / (2 * M_PI))
 # define DEG_TO_RAD (M_PI / 180.0) // pour convertir de degres a radian
 
 typedef struct s_calcul_table	t_calcul_table;
@@ -69,6 +70,7 @@ typedef struct s_dda
 	int							step_x;
 	int							step_y;
 	int							hit;
+	int							side;
 	float						perp_wall_dist;
 }								t_dda;
 
@@ -83,9 +85,13 @@ typedef struct s_game
 typedef struct s_map
 {
 	char						**grid;
+	char						*addr;
 	void						*img_ptr;
 	int							length;
 	int							height;
+	int							bits_per_pixel;
+	int							line_length;
+	int							endian;
 	t_game						*game;
 }								t_map;
 
@@ -103,6 +109,8 @@ t_dda							*ft_init_dda(void);
 t_calcul_table					*ft_init_calcul(t_calcul_table *table);
 t_game							*ft_init_game_data(void);
 t_map							*return_value_file(char **file);
+t_map							*copy_map(t_map *map, char **file,
+									int file_height, int file_length);
 
 // dda
 int								start_algo_dda(t_map *map, t_player *player,
@@ -110,13 +118,15 @@ int								start_algo_dda(t_map *map, t_player *player,
 int								init_game(t_map *map);
 int								render(t_map *map);
 
-void							draw_background(t_map *map, int side);
+// mlx
+void							draw_background(t_map *map);
 int								move_player(int keycode, t_map *map);
+void							draw_game(t_map *map);
+void							draw_wall(t_map *map, int x);
 
-t_map							*copy_map(t_map *map, char **file,
-									int file_height, int file_length);
+// free
 void							ft_free_map(char **map);
 int								close_window(t_map *map);
-void							draw_wall(t_map *map, int x, int side);
+void							ft_free_data(t_game *game);
 
 #endif

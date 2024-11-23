@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 19:02:09 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/11/19 11:19:05 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/11/23 12:44:21 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,20 @@ void	t_file_dest(t_file *file)
 		free(file->texture[2]);
 	if (file->texture[3])
 		free(file->texture[3]);
+}
+
+void	ft_free_data(t_game *game)
+{
+	if (!game->table)
+	{
+		free(game->player);
+		free(game->table);
+		free(game);
+	}
+	if (!game->player)
+	{
+		free(game->table);
+		free(game->player);
+		free(game);
+	}
 }

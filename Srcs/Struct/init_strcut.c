@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 20:06:17 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/22 17:28:59 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/11/23 11:54:54 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_player	*ft_init_player(t_calcul_table *table, t_player *player)
 	player->dir_x = -1.0;
 	player->dir_y = 0.0;
 	player->angle = atan2(player->dir_y, player->dir_x);
-	player->plane_x = 0.00;
+	player->plane_x = 0.0;
 	player->plane_y = 0.66;
 	define_fov(player);
 	player->table = table;
@@ -87,8 +87,21 @@ t_dda	*ft_init_dda(void)
 	int		i;
 
 	i = 0;
-	dda = ft_calloc(1, sizeof(t_dda));
+	dda = malloc(sizeof(t_dda));
 	if (!dda)
 		return (NULL);
+	dda->map_x = 0;
+	dda->map_y = 0;
+	dda->delta_dist_x = 0;
+	dda->delta_dist_y = 0;
+	dda->ray_dir_x = 0;
+	dda->ray_dir_x = 0;
+	dda->side_dist_x = 0;
+	dda->side_dist_y = 0;
+	dda->hit = 0;
+	dda->step_x = 1;
+	dda->step_y = 1;
+	dda->perp_wall_dist = 0;
+	dda->side = 0;
 	return (dda);
 }

@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:18:29 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/22 17:39:37 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/11/23 11:51:54 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	init_game(t_map *map)
 	if (!map->game->mlx_win)
 		return (printf("ERREUR init mlx\n"), 1);
 	mlx_loop_hook(map->game->mlx, &render, map);
-	mlx_key_hook(map->game->mlx_win, &move_player, map->game->player);
+	mlx_key_hook(map->game->mlx_win, &move_player, map);
 	mlx_loop(map->game->mlx);
 	close_window(map);
 	return (0);
