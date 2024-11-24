@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:54:52 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/23 13:21:20 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/11/24 18:56:30 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,23 +58,31 @@ void draw_background(t_map *map)
     int x;
 	int y;
     char *dst;
-    for (y = 0; y < SCREEN_HEIGHT / 2; y++)
-    {
-        for (x = 0; x < SCREEN_WIDTH; x++)
-        {
+
+	y = 0;
+	while (y < SCREEN_HEIGHT)
+	{
+		x=0;
+		while (x < SCREEN_WIDTH)
+		{
+			dst = map->addr + (y * map->line_length + x * (map->bits_per_pixel / 8));
+            *(unsigned int*)dst = 0x292929;
+			x++;
+		}
+		y++;
+	}
+	y = SCREEN_HEIGHT / 2;
+	while (y < SCREEN_HEIGHT)
+	{
+		x = 0;
+		while (x < SCREEN_WIDTH)
+		{
             dst = map->addr + (y * map->line_length + x * (map->bits_per_pixel / 8));
-            *(unsigned int*)dst = 0x87CEEB;
-        }
-    }
-    
-    for (y = SCREEN_HEIGHT / 2; y < SCREEN_HEIGHT; y++)
-    {
-        for (x = 0; x < SCREEN_WIDTH; x++)
-        {
-            dst = map->addr + (y * map->line_length + x * (map->bits_per_pixel / 8));
-            *(unsigned int*)dst = 0xFF0000;
-        }
-    }
+            *(unsigned int*)dst = 0x303030;
+			x++;			
+		}
+		y++;
+	}
 }
 
 // les deux fonctions suivantes c'est pour afficher la map en petit si on veut
