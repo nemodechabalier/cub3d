@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:45:42 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/23 12:16:45 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/11/25 12:01:11 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_player
 	float						plane_x;
 	float						plane_y;
 	double						fov;
+	//double						speed;
 	t_calcul_table				*table;
 	t_dda						*dda;
 }								t_player;
@@ -125,7 +126,7 @@ void							draw_game(t_map *map);
 void							draw_wall(t_map *map, int x);
 
 // free
-void							ft_free_map(char **map);
+void							ft_free_map(t_map *map);
 int								close_window(t_map *map);
 void							ft_free_data(t_game *game);
 

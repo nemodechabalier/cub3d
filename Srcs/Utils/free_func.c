@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:50:42 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/11/23 11:16:43 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/11/25 12:00:52 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,25 @@ void	free_strs(char **strs)
 	strs = NULL;
 }
 
-void	ft_free_map(char **map)
+void	ft_free_map(t_map *map)
 {
 	int	i;
 
 	i = 0;
-	if (map)
+	if (map && map->grid)
 	{
-		while (map[i])
+		while (i < map->height)
 		{
-			free(map[i]);
-			map[i] = NULL;
+			if (map->grid[i])
+			{
+				free(map->grid[i]);
+				map->grid[i] = NULL;
+			}
 			i++;
 		}
-		free(map);
 	}
+	free(map->grid);
+	map->grid = NULL;
 }
 
 void	close_image(t_map *map)
@@ -59,7 +63,7 @@ int	close_window(t_map *map)
 	free(map->game->mlx);
 	free(map->game->player);
 	free(map->game->table);
-	ft_free_map(map->grid);
+	ft_free_map(map);
 	free(map->game);
 	free(map);
 	exit(0);

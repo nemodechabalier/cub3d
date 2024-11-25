@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 10:59:14 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/23 12:44:52 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/11/24 21:02:04 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_map	*return_value_file(char **file)
 	}
 	if (!copy_map(map, file, file_height, file_height))
 		return (NULL);
+	//print_strs(map->grid);
 	return (map);
 }
 
@@ -46,7 +47,7 @@ t_map	*copy_map(t_map *map, char **file, int file_height, int file_length)
 
 	if (!file)
 		return (NULL);
-	ft_memset(map, 0, sizeof(t_map));
+	//ft_memset(map, 0, sizeof(t_map));
 	map->grid = malloc(sizeof(char *) * (file_height + 1));
 	if (!map->grid)
 	{
@@ -62,6 +63,7 @@ t_map	*copy_map(t_map *map, char **file, int file_height, int file_length)
 	map->img_ptr = NULL;
 	map->height = file_height;
 	map->length = file_length;
+	printf("height %d, lenght %d\n", map->height, map->length);
 	map->addr = NULL;
 	map->bits_per_pixel = 0;
 	map->endian = 0;
@@ -86,15 +88,9 @@ t_game	*ft_init_game_data(void)
 		return (NULL);
 	game->table = ft_init_calcul(table);
 	if (!game->table)
-	{
-		ft_free_data(game);
-		return (NULL);
-	}
+		return (ft_free_data(game), NULL);
 	game->player = ft_init_player(table, player);
 	if (!game->player)
-	{
-		ft_free_data(game);
-		return (NULL);
-	}
+		return (ft_free_data(game), NULL);
 	return (game);
 }

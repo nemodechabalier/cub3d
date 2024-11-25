@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 09:57:35 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/23 13:26:31 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/11/25 11:50:15 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,45 +51,65 @@ void	ft_rotate_player(t_player *player, float rotation_angle,
 	player->plane_x = old_plane_x * cos_rot - old_plane_y * sin_rot;
 	player->plane_y = old_plane_x * sin_rot + old_plane_y * cos_rot;
 	player->angle += rotation_angle;
-	//while (player->angle >= 2 * M_PI)
+	// while (player->angle >= 2 * M_PI)
 	//	player->angle -= 2 * M_PI;
-	//while (player->angle < 0)
+	// while (player->angle < 0)
 	//	player->angle += 2 * M_PI;
 }
 
-void	move_player_dir(t_map *map, t_player *player, int bool)
+int		valide_move(t_map *map, int x, int y)
 {
-	if (bool == 1)
+	if (map->grid[x][y] == '1')
+		return (FAIL);
+	return (SUCCESS);
+}
+
+void	move_player_dir(t_map *map, t_player *player, int move_forward)
+{
+	double	move_speed;
+	double speed = 0.05;
+	printf("Pos x =%f\nPos y = %f\nPlayer dir x =%f\nPlayer dir y = %f\n",
+		player->pos_x, player->pos_y, player->dir_x, player->dir_y);
+	move_speed = speed * (move_forward ? 1 : -1);
+	double next_pos_x = player->pos_x + player->dir_x * move_speed;
+	double next_pos_y = player->pos_y + player->dir_y * move_speed;
+	if ((int)next_pos_x >= 0 && (int)next_pos_x < map->length
+		&& (int)player->pos_y >= 0 && (int)player->pos_y < map->height
+		&& map->grid[(int)next_pos_x][(int)player->pos_y] > 0)
 	{
-		if ((int)(player->pos_x + player->dir_x) >= 0 && (int)(player->pos_x
-				+ player->dir_x) < map->length && (int)(player->pos_y) >= 0
-			&& (int)(player->pos_y) < map->height
-			&& map->grid[(int)(player->pos_x
-				+ player->dir_x)][(int)(player->pos_y)] > 0)
-			player->pos_x += player->dir_x;
-		if ((int)(player->pos_x) >= 0 && (int)(player->pos_x) < map->length
-			&& (int)(player->pos_y + player->dir_y) >= 0 && (int)(player->pos_y
-				+ player->dir_y) < map->height
-			&& map->grid[(int)(player->pos_x)][(int)(player->pos_y
-				+ player->dir_y)] > 0)
-			player->pos_y += player->dir_y;
+		player->pos_x = next_pos_x;
 	}
-	else
+	if ((int)player->pos_x >= 0 && (int)player->pos_x < map->length
+		&& (int)next_pos_y >= 0 && (int)next_pos_y < map->height
+		&& map->grid[(int)player->pos_x][(int)next_pos_y] > 0)
 	{
-		if ((int)(player->pos_x + player->dir_x) >= 0 && (int)(player->pos_x
-				+ player->dir_x) < map->length && (int)(player->pos_y) >= 0
-			&& (int)(player->pos_y) < map->height
-			&& map->grid[(int)(player->pos_x
-				+ player->dir_x)][(int)(player->pos_y)] > 0)
-			player->pos_x -= player->dir_x;
-		if ((int)(player->pos_x) >= 0 && (int)(player->pos_x) < map->length
-			&& (int)(player->pos_y + player->dir_y) >= 0 && (int)(player->pos_y
-				+ player->dir_y) < map->height
-			&& map->grid[(int)(player->pos_x)][(int)(player->pos_y
-				+ player->dir_y)] > 0)
-			player->pos_y -= player->dir_y;
+		player->pos_y = next_pos_y;
 	}
 }
+
+//void	move_player_dir(t_map *map, t_player *player, int i)
+//{
+//	printf("Pos x =%f\nPos y = %f\nPlayer dir x =%f\nPlayer dir y = %f\n", player->pos_x, player->pos_y, player->dir_x, player->dir_y);
+	
+//	if (i == 0)
+//	{
+//		if (map->grid[(int)(player->pos_x
+//				+ player->dir_x)][(int)(player->pos_y)] > 0)
+//			player->pos_x += player->dir_x;
+//		if (map->grid[(int)(player->pos_x)][(int)(player->pos_y
+//				+ player->dir_y)] > 0)
+//			player->pos_y += player->dir_y;
+//	}
+//	else
+//	{
+//		if (map->grid[(int)(player->pos_x
+//				+ player->dir_x)][(int)(player->pos_y)] > 0)
+//			player->pos_x -= player->dir_x;
+//		if (map->grid[(int)(player->pos_x)][(int)(player->pos_y
+//				+ player->dir_y)] > 0)
+//			player->pos_y -= player->dir_y;
+//	}
+//}
 
 int	move_player(int keycode, t_map *map)
 {
@@ -107,9 +127,9 @@ int	move_player(int keycode, t_map *map)
 	if (keycode == 65307)
 		close_window(map);
 	else if ((keycode == 'w' || keycode == 'W'))
-		move_player_dir(map, map->game->player, 0);
-	else if ((keycode == 's' || keycode == 'S'))
 		move_player_dir(map, map->game->player, 1);
+	else if ((keycode == 's' || keycode == 'S'))
+		move_player_dir(map, map->game->player, 0);
 	else if ((keycode == 'a' || keycode == 'A'))
 		ft_rotate_player(map->game->player, 0.1f, map->game->player->table);
 	else if ((keycode == 'd' || keycode == 'D'))

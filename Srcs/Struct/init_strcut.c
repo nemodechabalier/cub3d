@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 20:06:17 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/23 11:54:54 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/11/25 11:49:48 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,14 @@ t_player	*ft_init_player(t_calcul_table *table, t_player *player)
 
 	i = 0;
 	player->pos_x = 2.5;
-	player->pos_y = 2.5;
+	player->pos_y = 4.5;
 	player->dir_x = -1.0;
 	player->dir_y = 0.0;
 	player->angle = atan2(player->dir_y, player->dir_x);
 	player->plane_x = 0.0;
 	player->plane_y = 0.66;
 	define_fov(player);
+	//player->speed = 0.05;
 	player->table = table;
 	player->dda = ft_init_dda();
 	if (!player->dda)

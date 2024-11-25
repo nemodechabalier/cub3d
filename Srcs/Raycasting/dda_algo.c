@@ -6,19 +6,21 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:46:11 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/23 13:22:08 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/11/25 11:55:10 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/cub3d.h"
+
+//(Digital Differential Analyzer)
 
 void	calcul_ray_dir(t_player *player, int x)
 {
 	float	camera_x;
 
 	camera_x = 2 * x / (float)SCREEN_WIDTH - 1;
-	printf("Camera_x %f\nDir_x %f\nPlane_x %f\n", camera_x, player->dir_x,
-		player->dir_y);
+	//printf("Camera_x %f\nDir_x %f\nPlane_x %f\n", camera_x, player->dir_x,
+	//	player->dir_y);
 	player->dda->ray_dir_x = player->dir_x + player->plane_x * camera_x;
 	player->dda->ray_dir_y = player->dir_y + player->plane_y * camera_x;
 	if (player->dda->ray_dir_x == 0)
@@ -31,10 +33,15 @@ void	calcul_ray_dir(t_player *player, int x)
 		player->dda->delta_dist_y = fabs(1 / player->dda->ray_dir_y);
 }
 
-void	init_dda(t_player *player)
+void	init_pos_map(t_player *player)
 {
 	player->dda->map_x = (int)player->pos_x;
 	player->dda->map_y = (int)player->pos_y;
+}
+
+void	init_dda(t_player *player)
+{
+	init_pos_map(player);
 	if (player->dda->ray_dir_x < 0)
 	{
 		player->dda->step_x = -1;
@@ -61,12 +68,36 @@ void	init_dda(t_player *player)
 	}
 }
 
+// void	continue_algo(t_player *player)
+//{
+//	if (player->dda->side_dist_x < player->dda->side_dist_y)
+//	{
+//		player->dda->side_dist_x += player->dda->delta_dist_x;
+//		player->dda->map_x += player->dda->step_x;
+//		player->dda->side = 0;
+//	}
+//	else
+//	{
+//		player->dda->side_dist_y += player->dda->delta_dist_y;
+//		player->dda->map_y += player->dda->step_y;
+//		player->dda->side = 1;
+//	}
+//}
+
+void	choose_dist(t_player *player)
+{
+	if (player->dda->side == 0)
+		player->dda->perp_wall_dist = (player->dda->side_dist_x
+				- player->dda->delta_dist_x);
+	else
+		player->dda->perp_wall_dist = (player->dda->side_dist_y
+				- player->dda->delta_dist_y);
+}
+
 int	start_algo_dda(t_map *map, t_player *player, int x)
 {
 	calcul_ray_dir(player, x);
 	init_dda(player);
-	if (player->dda == NULL)
-		return (1);
 	player->dda->hit = 0;
 	while (player->dda->hit == 0)
 	{
@@ -82,32 +113,24 @@ int	start_algo_dda(t_map *map, t_player *player, int x)
 			player->dda->map_y += player->dda->step_y;
 			player->dda->side = 1;
 		}
-		if (player->dda->map_x < 0 || player->dda->map_x >= map->length
-			|| player->dda->map_y < 0 || player->dda->map_y >= map->height)
-		{
-			printf("Error limit map\n");
-			break ;
-		}
+		//if (player->dda->map_x < 0 || player->dda->map_x >= map->length
+		//	|| player->dda->map_y < 0 || player->dda->map_y >= map->height)
+		//{
+		//	printf("Error limit map\n");
+		//	break ;
+		//}
 		if (map->grid[player->dda->map_x][player->dda->map_y] > 0)
 		{
 			player->dda->hit = 1;
 			break ;
 		}
 	}
-	if (player->dda->side == 0)
-		player->dda->perp_wall_dist = (player->dda->side_dist_x
-				- player->dda->delta_dist_x);
-	else
-		player->dda->perp_wall_dist = (player->dda->side_dist_y
-				- player->dda->delta_dist_y);
+	choose_dist(player);
 	return (0);
 }
 
 int	render(t_map *map)
 {
-	int	x;
-
-	x = 0;
 	map->img_ptr = mlx_new_image(map->game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (!map->img_ptr)
 		return (1);
@@ -118,6 +141,5 @@ int	render(t_map *map)
 	draw_game(map);
 	mlx_put_image_to_window(map->game->mlx, map->game->mlx_win, map->img_ptr, 0,
 		0);
-	mlx_destroy_image(map->game->mlx, map->img_ptr);
 	return (0);
 }
