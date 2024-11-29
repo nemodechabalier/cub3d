@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 20:06:17 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/25 11:49:48 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/11/25 12:42:31 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_calcul_table	*ft_init_calcul(t_calcul_table *table)
 		free(table->cos);
 		free(table->sin);
 		free(table->tang);
+		free(table);
 		return (NULL);
 	}
 	while (i < TABLE_SIZE)

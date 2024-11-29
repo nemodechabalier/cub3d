@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:50:42 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/11/25 12:00:52 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/11/25 12:28:39 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	close_window(t_map *map)
 	close_image(map);
 	mlx_destroy_display(map->game->mlx);
 	free(map->game->mlx);
+	free(map->game->player->dda);
 	free(map->game->player);
 	free(map->game->table);
 	ft_free_map(map);

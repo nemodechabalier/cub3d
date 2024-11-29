@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:45:42 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/25 12:01:11 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/11/29 18:47:16 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,13 @@
 //# define RAD_TO_DEG (180.0 / M_PI) // pour convertir de radian a degres
 # define RAD_TO_DEG (TABLE_SIZE / (2 * M_PI))
 # define DEG_TO_RAD (M_PI / 180.0) // pour convertir de degres a radian
+# define texWidth 64
+# define texHeight 64
 
 typedef struct s_calcul_table	t_calcul_table;
 typedef struct s_dda			t_dda;
 typedef struct s_game			t_game;
+typedef struct s_texture		t_texture;
 
 typedef struct s_player
 {
@@ -53,7 +56,7 @@ typedef struct s_player
 	float						plane_x;
 	float						plane_y;
 	double						fov;
-	//double						speed;
+	// double						speed;
 	t_calcul_table				*table;
 	t_dda						*dda;
 }								t_player;
@@ -81,7 +84,16 @@ typedef struct s_game
 	void						*mlx_win;
 	t_player					*player;
 	t_calcul_table				*table;
+	t_texture					*text;
 }								t_game;
+
+typedef struct s_texture
+{
+	void						*img_ptr;
+	int							data;
+	int							width;
+	int							height;
+}								t_texture;
 
 typedef struct s_map
 {
@@ -112,6 +124,8 @@ t_game							*ft_init_game_data(void);
 t_map							*return_value_file(char **file);
 t_map							*copy_map(t_map *map, char **file,
 									int file_height, int file_length);
+t_texture						*ft_init_texture(t_game *game, char *path,
+									t_texture *texture);
 
 // dda
 int								start_algo_dda(t_map *map, t_player *player,
@@ -123,7 +137,11 @@ int								render(t_map *map);
 void							draw_background(t_map *map);
 int								move_player(int keycode, t_map *map);
 void							draw_game(t_map *map);
-void							draw_wall(t_map *map, int x);
+void							draw_wall(t_map *map, int color, int tex_x,
+									int tex_y);
+// void							draw_wall(t_map *map, int x);
+void							get_texture_position(t_map *map,
+									t_player *player, int x);
 
 // free
 void							ft_free_map(t_map *map);

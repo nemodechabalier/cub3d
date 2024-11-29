@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:46:11 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/25 11:55:10 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/11/29 17:03:53 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 //(Digital Differential Analyzer)
 
+/*
+fabs return absolute value
+*/
 void	calcul_ray_dir(t_player *player, int x)
 {
 	float	camera_x;
@@ -84,7 +87,7 @@ void	init_dda(t_player *player)
 //	}
 //}
 
-void	choose_dist(t_player *player)
+void	chose_dist(t_player *player)
 {
 	if (player->dda->side == 0)
 		player->dda->perp_wall_dist = (player->dda->side_dist_x
@@ -125,7 +128,7 @@ int	start_algo_dda(t_map *map, t_player *player, int x)
 			break ;
 		}
 	}
-	choose_dist(player);
+	chose_dist(player);
 	return (0);
 }
 
