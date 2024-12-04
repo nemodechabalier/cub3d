@@ -6,11 +6,29 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:54:52 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/04 11:29:48 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:38:17 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/cub3d.h"
+
+void	clear_buffer(int *buffer, int width, int height)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	x = 0;
+	while (y < height)
+	{
+		while (x < width)
+		{
+			buffer = 0;
+			x++;
+		}
+		y++;
+	}
+}
 
 void	draw_game(t_map *map)
 {
@@ -21,49 +39,19 @@ void	draw_game(t_map *map)
 	while (x < SCREEN_WIDTH)
 	{
 		start_algo_dda(map, map->game->player, x);
-		//draw_wall(map, x);
 		get_texture_position(map, map->game->player, x);
 		x++;
 	}
 }
 
-void	draw_wall(t_map *map, int color, int tex_x, int tex_y)
+void	draw_wall(t_map *map, int *color, int tex_x, int tex_y)
 {
 	char	*dest;
 
-	dest = map->addr + (tex_y * map->line_length + tex_x * (map->bits_per_pixel / 8));
-	*(unsigned int *)dest = color;
+	dest = map->addr + (tex_y * map->line_length + tex_x * (map->bits_per_pixel
+				/ 8));
+	*(unsigned int *)dest = *color;
 }
-
-//void	draw_wall(t_map *map, int x)
-//{
-//	int		line_height;
-//	int		draw_start;
-//	int		draw_end;
-//	int		color;
-//	int		y;
-//	char	*dest;
-
-//	// le * 0.2 c'est une valeur de constante pour gerer les murs
-//	line_height = (int)(SCREEN_HEIGHT / map->game->player->dda->perp_wall_dist
-//			* 0.2);
-//	draw_start = -line_height / 2 + SCREEN_HEIGHT / 2;
-//	if (draw_start < 0)
-//		draw_start = 0;
-//	draw_end = line_height / 2 + SCREEN_HEIGHT / 2;
-//	if (draw_end >= SCREEN_HEIGHT)
-//		draw_end = SCREEN_HEIGHT - 1;
-//	color = 0x0080FF;
-//	y = draw_start;
-//	while (y < draw_end)
-//	{
-//		dest = map->addr + (y * map->line_length + x * (map->bits_per_pixel
-//					/ 8));
-//		*(unsigned int *)dest = color;
-//		// mlx_pixel_put(map->game->mlx, map->game->mlx_win, x, y, color);
-//		y++;
-//	}
-//}
 
 void	draw_background(t_map *map)
 {

@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:45:42 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/04 11:03:10 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:04:03 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,11 @@ typedef struct s_game
 
 typedef struct s_texture
 {
-	void						*img_ptr;
-	int							data;
+	void						*img_ptr[2];
+	char						*path[2];
 	int							width;
 	int							height;
-	char						*addr;
+	char						*addr[2];
 	int							bits_per_pixel;
 	int							line_length;
 	int							endian;
@@ -128,7 +128,7 @@ t_game							*ft_init_game_data(void);
 t_map							*return_value_file(char **file);
 t_map							*copy_map(t_map *map, char **file,
 									int file_height, int file_length);
-t_texture						*ft_init_texture(t_game *game, char *path,
+t_texture						*ft_init_texture(t_game *game,
 									t_texture *texture);
 
 // dda
@@ -141,7 +141,7 @@ int								render(t_map *map);
 void							draw_background(t_map *map);
 int								move_player(int keycode, t_map *map);
 void							draw_game(t_map *map);
-void							draw_wall(t_map *map, int color, int tex_x,
+void							draw_wall(t_map *map, int *color, int tex_x,
 									int tex_y);
 // void							draw_wall(t_map *map, int x);
 void							get_texture_position(t_map *map,

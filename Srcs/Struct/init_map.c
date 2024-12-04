@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 10:59:14 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/04 11:24:56 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/04 16:42:53 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_map	*return_value_file(char **file)
 			file_length = map->line_length;
 		i++;
 	}
-	if (!copy_map(map, file, file_height, file_height))
+	if (!copy_map(map, file, file_height, file_length))
 		return (free(map), NULL);
 	return (map);
 }
