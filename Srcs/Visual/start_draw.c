@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:54:52 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/29 18:42:08 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/04 11:29:48 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	draw_wall(t_map *map, int color, int tex_x, int tex_y)
 
 	dest = map->addr + (tex_y * map->line_length + tex_x * (map->bits_per_pixel / 8));
 	*(unsigned int *)dest = color;
-	//dest = path;
 }
 
 //void	draw_wall(t_map *map, int x)

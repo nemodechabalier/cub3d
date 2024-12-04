@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:45:42 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/29 18:47:16 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/04 11:03:10 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,10 @@ typedef struct s_texture
 	int							data;
 	int							width;
 	int							height;
+	char						*addr;
+	int							bits_per_pixel;
+	int							line_length;
+	int							endian;
 }								t_texture;
 
 typedef struct s_map

@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 10:59:14 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/29 18:52:13 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/04 11:24:56 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,7 @@ t_game	*ft_init_game_data(void)
 	t_game			*game;
 	t_player		*player;
 	t_calcul_table	*table;
-	t_texture		*texture;
 
-	texture = malloc(sizeof(t_texture));
-	if (!texture)
-		return (NULL);
 	game = malloc(sizeof(t_game));
 	if (!game)
 		return (NULL);
@@ -92,8 +88,5 @@ t_game	*ft_init_game_data(void)
 	game->player = ft_init_player(table, player);
 	if (!game->player)
 		return (ft_free_data(game), NULL);
-	game->text = ft_init_texture(game, "redbrick.xpm", texture);
-	if (!game->text)
-		return (NULL);
 	return (game);
 }

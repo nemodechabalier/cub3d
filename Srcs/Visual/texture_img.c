@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:50:16 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/29 18:48:16 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/04 11:30:17 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,17 @@ void	get_texture_position(t_map *map, t_player *player, int x)
 	y = draw_start;
 	while (y < draw_end)
 	{
-		texture_y = (int)texPos & (texHeight - 1);
+		texture_y = (int)texPos & (texHeight - 1); // mask with (texHeight- 1) in case of overflow
 		texPos += step;
-		texture->data = texHeight * texture_y + texture_x;
-		draw_wall(map, texture->data, x, y);
+		int color = *(int *)(texture->addr + (texture_y * texture->line_length + texture->bits_per_pixel));
+		draw_wall(map, color, x, y);
 		y++;
 	}
 }
 
 t_texture	*ft_init_texture(t_game *game, char *path, t_texture *texture)
 {
+	(void)path;
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		return (free(game), NULL);
@@ -76,5 +77,8 @@ t_texture	*ft_init_texture(t_game *game, char *path, t_texture *texture)
 	texture->width = texWidth;
 	texture->img_ptr = mlx_xpm_file_to_image(game->mlx, path, &texture->width,
 			&texture->height);
+	texture->addr = mlx_get_data_addr(texture->img_ptr,
+			&texture->bits_per_pixel, &texture->line_length, &texture->endian);
+	texture->img_ptr = NULL;
 	return (texture);
 }
