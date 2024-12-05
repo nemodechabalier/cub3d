@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:50:16 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/04 15:57:44 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/05 19:49:28 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	get_texture_position(t_map *map, t_player *player, int x)
 	double		texPos;
 	int			*color;
 	int			tex_index;
+	int			sub_texture_x;
 
 	// int			textNum = map->grid[player->dda->map_x][player->dda->map_y]- 1;
 	texture = map->game->text;
@@ -58,8 +59,7 @@ void	get_texture_position(t_map *map, t_player *player, int x)
 		texture_y = (int)texPos & (texHeight - 1);
 		// texture_y = (int)((texPos * texture->height) / line_height);
 		texPos += step;
-		int sub_texture_x = (int)((wall_x + player->dda->map_x) * texture->width)
-			% texture->width;
+		sub_texture_x = (int)(wall_x * texture->width) % texture->width;
 		color = (int *)(texture->addr[tex_index] + (texture_y
 					* texture->line_length + sub_texture_x
 					* (texture->bits_per_pixel / 8)));

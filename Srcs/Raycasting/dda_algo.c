@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:46:11 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/04 16:45:39 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/05 19:42:56 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	calcul_ray_dir(t_player *player, int x)
 	float	camera_x;
 
 	camera_x = 2 * x / (float)SCREEN_WIDTH - 1;
-	//printf("Camera_x %f\nDir_x %f\nPlane_x %f\n", camera_x, player->dir_x,
+	// printf("Camera_x %f\nDir_x %f\nPlane_x %f\n", camera_x, player->dir_x,
 	//	player->dir_y);
 	player->dda->ray_dir_x = player->dir_x + player->plane_x * camera_x;
 	player->dda->ray_dir_y = player->dir_y + player->plane_y * camera_x;
@@ -116,7 +116,7 @@ int	start_algo_dda(t_map *map, t_player *player, int x)
 			player->dda->map_y += player->dda->step_y;
 			player->dda->side = 1;
 		}
-		//if (player->dda->map_x < 0 || player->dda->map_x >= map->length
+		// if (player->dda->map_x < 0 || player->dda->map_x >= map->length
 		//	|| player->dda->map_y < 0 || player->dda->map_y >= map->height)
 		//{
 		//	printf("Error limit map\n");
@@ -134,6 +134,8 @@ int	start_algo_dda(t_map *map, t_player *player, int x)
 
 int	render(t_map *map)
 {
+	if (map->img_ptr)
+		mlx_destroy_image(map->game->mlx, map->img_ptr);
 	map->img_ptr = mlx_new_image(map->game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (!map->img_ptr)
 		return (1);

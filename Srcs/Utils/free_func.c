@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:50:42 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/11/25 12:28:39 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/05 19:24:39 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,23 @@ void	ft_free_map(t_map *map)
 	map->grid = NULL;
 }
 
+void	close_texture(t_map *map)
+{
+	int			i;
+	t_texture	*texture;
+
+	i = 0;
+	texture = map->game->text;
+	while (i < 2)
+	{
+		if (texture->img_ptr[i])
+			mlx_destroy_image(map->game->mlx, texture->img_ptr[i]);
+		i++;
+	}
+	free(texture);
+	// free(map->game->text);
+}
+
 void	close_image(t_map *map)
 {
 	if (map->img_ptr != NULL)
@@ -57,13 +74,24 @@ void	close_image(t_map *map)
 int	close_window(t_map *map)
 {
 	mlx_loop_end(map->game->mlx);
-	mlx_destroy_window(map->game->mlx, map->game->mlx_win);
+	close_texture(map);
 	close_image(map);
-	mlx_destroy_display(map->game->mlx);
-	free(map->game->mlx);
+	if (map->game->mlx_win)
+		mlx_destroy_window(map->game->mlx, map->game->mlx_win);
+	if (map->game->mlx)
+	{
+		mlx_destroy_display(map->game->mlx);
+		free(map->game->mlx);
+	}
 	free(map->game->player->dda);
 	free(map->game->player);
-	free(map->game->table);
+	if (map->game->table)
+	{
+		free(map->game->table->cos);
+		free(map->game->table->sin);
+		free(map->game->table->tang);
+		free(map->game->table);
+	}
 	ft_free_map(map);
 	free(map->game);
 	free(map);

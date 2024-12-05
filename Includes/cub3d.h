@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:45:42 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/04 15:04:03 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/05 19:14:20 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,5 +151,4 @@ void							get_texture_position(t_map *map,
 void							ft_free_map(t_map *map);
 int								close_window(t_map *map);
 void							ft_free_data(t_game *game);
-
 #endif
