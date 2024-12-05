@@ -6,35 +6,18 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:54:52 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/04 15:38:17 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/05 20:35:44 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/cub3d.h"
-
-void	clear_buffer(int *buffer, int width, int height)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	x = 0;
-	while (y < height)
-	{
-		while (x < width)
-		{
-			buffer = 0;
-			x++;
-		}
-		y++;
-	}
-}
 
 void	draw_game(t_map *map)
 {
 	int	x;
 
 	x = 0;
+	transpose_text(map->game->text->addr, 3);
 	draw_background(map);
 	while (x < SCREEN_WIDTH)
 	{

@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:50:16 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/05 19:49:28 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/05 20:45:15 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,30 @@
 /*
 floor calcul l'arrondie entier inferieur
 */
+
+void	transpose_text(char **textures, int tex_count)
+{
+	int i = 0;
+	int x = 0;
+	int y;
+	
+	while (i < tex_count)
+	{
+		while (x < texWidth)
+		{
+			y = x;
+			while (y < x)
+			{
+				int temp = textures[i][y * texWidth + x];
+				textures[i][y * texWidth + x] = textures[i][x * texHeight + y];
+				textures[i][x * texHeight + y] = temp;
+				y++;
+			}
+			x++;
+		}
+		i++;
+	}	
+}
 
 void	get_texture_position(t_map *map, t_player *player, int x)
 {
@@ -32,7 +56,6 @@ void	get_texture_position(t_map *map, t_player *player, int x)
 	int			tex_index;
 	int			sub_texture_x;
 
-	// int			textNum = map->grid[player->dda->map_x][player->dda->map_y]- 1;
 	texture = map->game->text;
 	tex_index = (player->dda->side == 0) ? 0 : 1;
 	if (player->dda->side == 0)
@@ -57,12 +80,11 @@ void	get_texture_position(t_map *map, t_player *player, int x)
 	while (y < draw_end)
 	{
 		texture_y = (int)texPos & (texHeight - 1);
-		// texture_y = (int)((texPos * texture->height) / line_height);
 		texPos += step;
-		sub_texture_x = (int)(wall_x * texture->width) % texture->width;
-		color = (int *)(texture->addr[tex_index] + (texture_y
-					* texture->line_length + sub_texture_x
-					* (texture->bits_per_pixel / 8)));
+		sub_texture_x = (int)(wall_x * texWidth) % texture->width;
+		color = (int *)(texture->addr[tex_index] + sub_texture_x
+				* texture->line_length + texture_y
+				* (texture->bits_per_pixel / 8));
 		draw_wall(map, color, x, y);
 		y++;
 	}
@@ -82,12 +104,13 @@ t_texture	*ft_init_texture(t_game *game, t_texture *texture)
 	texture->width = texWidth;
 	texture->path[0] = "greystone.xpm";
 	texture->path[1] = "redbrick.xpm";
-	while (i < 2)
+	texture->path[2] = "bluestone.xpm";
+	while (i < 3)
 	{
 		texture->img_ptr[i] = mlx_xpm_file_to_image(game->mlx, texture->path[i],
 				&texture->width, &texture->height);
 		if (!texture->img_ptr[i])
-			return (printf("Error init texture\n"), NULL);
+			return (printf("Error loading texture %s\n", texture->path[i]), NULL);
 		texture->addr[i] = mlx_get_data_addr(texture->img_ptr[i],
 				&texture->bits_per_pixel, &texture->line_length,
 				&texture->endian);

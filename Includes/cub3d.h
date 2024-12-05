@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:45:42 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/05 19:14:20 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/05 20:33:04 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,11 @@ typedef struct s_game
 
 typedef struct s_texture
 {
-	void						*img_ptr[2];
-	char						*path[2];
+	void						*img_ptr[3];
+	char						*path[3];
 	int							width;
 	int							height;
-	char						*addr[2];
+	char						*addr[3];
 	int							bits_per_pixel;
 	int							line_length;
 	int							endian;
@@ -143,9 +143,9 @@ int								move_player(int keycode, t_map *map);
 void							draw_game(t_map *map);
 void							draw_wall(t_map *map, int *color, int tex_x,
 									int tex_y);
-// void							draw_wall(t_map *map, int x);
 void							get_texture_position(t_map *map,
 									t_player *player, int x);
+void							transpose_text(char **textures, int tex_count);
 
 // free
 void							ft_free_map(t_map *map);
