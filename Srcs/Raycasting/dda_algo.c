@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:46:11 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/05 19:42:56 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/08 12:56:47 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,13 +116,13 @@ int	start_algo_dda(t_map *map, t_player *player, int x)
 			player->dda->map_y += player->dda->step_y;
 			player->dda->side = 1;
 		}
-		// if (player->dda->map_x < 0 || player->dda->map_x >= map->length
+		//if (player->dda->map_x < 0 || player->dda->map_x >= map->length
 		//	|| player->dda->map_y < 0 || player->dda->map_y >= map->height)
 		//{
 		//	printf("Error limit map\n");
-		//	break ;
+		//	return (1);
 		//}
-		if (map->grid[player->dda->map_x][player->dda->map_y] > 0)
+		if (map->grid[player->dda->map_x][player->dda->map_y] == '1')
 		{
 			player->dda->hit = 1;
 			break ;

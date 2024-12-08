@@ -6,11 +6,20 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 09:57:35 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/25 13:54:59 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/08 12:56:23 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/cub3d.h"
+
+int	valid_move(int x, int y, t_map *map)
+{
+	if (x < 0 || x >= map->length || y < 0 || y >= map->height)
+		return (FAIL);
+	//if (map->grid[x][y] == '1')
+	//	return (FAIL);
+	return (SUCCESS);
+}
 
 int	get_table_index(float angle)
 {
@@ -51,17 +60,6 @@ void	ft_rotate_player(t_player *player, float rotation_angle,
 	player->plane_x = old_plane_x * cos_rot - old_plane_y * sin_rot;
 	player->plane_y = old_plane_x * sin_rot + old_plane_y * cos_rot;
 	player->angle += rotation_angle;
-	// while (player->angle >= 2 * M_PI)
-	//	player->angle -= 2 * M_PI;
-	// while (player->angle < 0)
-	//	player->angle += 2 * M_PI;
-}
-
-int	valide_move(t_map *map, int x, int y)
-{
-	if (map->grid[x][y] == '1')
-		return (FAIL);
-	return (SUCCESS);
 }
 
 void	move_player_dir(t_map *map, t_player *player, int move_forward)
@@ -75,18 +73,14 @@ void	move_player_dir(t_map *map, t_player *player, int move_forward)
 	move_speed = speed * (move_forward ? 1 : -1);
 	next_pos_x = player->pos_x + player->dir_x * move_speed;
 	next_pos_y = player->pos_y + player->dir_y * move_speed;
-	if ((int)next_pos_x >= 0 && (int)next_pos_x < map->length
-		&& (int)player->pos_y >= 0 && (int)player->pos_y < map->height
-		&& map->grid[(int)next_pos_x][(int)player->pos_y] > 0)
-	{
+	if (valid_move((int)next_pos_x, (int)player->pos_y, map) == SUCCESS)
 		player->pos_x = next_pos_x;
-	}
-	if ((int)player->pos_x >= 0 && (int)player->pos_x < map->length
-		&& (int)next_pos_y >= 0 && (int)next_pos_y < map->height
-		&& map->grid[(int)player->pos_x][(int)next_pos_y] > 0)
-	{
+	else
+		printf("Player next pos x: %f\n", player->pos_x);
+	if (valid_move((int)player->pos_x, (int)next_pos_y, map) == SUCCESS)
 		player->pos_y = next_pos_y;
-	}
+	else
+		printf("Player next pos y: %f\n", player->pos_y);
 }
 
 int	move_player(int keycode, t_map *map)
