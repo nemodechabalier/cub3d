@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:18:29 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/05 20:58:35 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/08 20:26:40 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,24 @@ int	init_game(t_map *map)
 	mlx_loop(map->game->mlx);
 	close_window(map);
 	return (SUCCESS);
+}
+
+int	render(t_map *map)
+{
+	if (map->img_ptr)
+		mlx_destroy_image(map->game->mlx, map->img_ptr);
+	map->img_ptr = mlx_new_image(map->game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+	if (!map->img_ptr)
+		return (1);
+	map->addr = mlx_get_data_addr(map->img_ptr, &map->bits_per_pixel,
+			&map->line_length, &map->endian);
+	if (!map->game->player)
+		return (1);
+	draw_game(map);
+	draw_minimap(map, 150);
+	mlx_put_image_to_window(map->game->mlx, map->game->mlx_win, map->img_ptr, 0,
+		0);
+	return (0);
 }
 
 // mlx_mouse_hook ( void *win_ptr, int (*funct_ptr)(), void *param );

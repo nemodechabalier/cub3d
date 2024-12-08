@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:50:16 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/05 20:45:15 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/08 16:55:33 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,30 @@
 floor calcul l'arrondie entier inferieur
 */
 
-void	transpose_text(char **textures, int tex_count)
-{
-	int i = 0;
-	int x = 0;
-	int y;
+//void	transpose_text(char **textures, int tex_count)
+//{
+//	int i = 0;
+//	int x;
+//	int y;
 	
-	while (i < tex_count)
-	{
-		while (x < texWidth)
-		{
-			y = x;
-			while (y < x)
-			{
-				int temp = textures[i][y * texWidth + x];
-				textures[i][y * texWidth + x] = textures[i][x * texHeight + y];
-				textures[i][x * texHeight + y] = temp;
-				y++;
-			}
-			x++;
-		}
-		i++;
-	}	
-}
+//	while (i < tex_count)
+//	{
+//		x = 0;
+//		while (x < texWidth)
+//		{
+//			y = 0;
+//			while (y < x)
+//			{
+//				int temp = textures[i][y * texWidth + x];
+//				textures[i][y * texWidth + x] = textures[i][x * texHeight + y];
+//				textures[i][x * texHeight + y] = temp;
+//				y++;
+//			}
+//			x++;
+//		}
+//		i++;
+//	}	
+//}
 
 void	get_texture_position(t_map *map, t_player *player, int x)
 {
@@ -67,7 +68,7 @@ void	get_texture_position(t_map *map, t_player *player, int x)
 	wall_x -= floor(wall_x);
 	texture_x = (int)(wall_x * (texWidth));
 	line_height = (int)(SCREEN_HEIGHT / map->game->player->dda->perp_wall_dist
-			* 0.2);
+			* 0.8);
 	draw_start = -line_height / 2 + SCREEN_HEIGHT / 2;
 	if (draw_start < 0)
 		draw_start = 0;
@@ -102,10 +103,11 @@ t_texture	*ft_init_texture(t_game *game, t_texture *texture)
 		return (free(game), NULL);
 	texture->height = texHeight;
 	texture->width = texWidth;
-	texture->path[0] = "greystone.xpm";
-	texture->path[1] = "redbrick.xpm";
+	texture->path[0] = "marbel.xpm";
+	texture->path[1] = "brick_r.xpm";
 	texture->path[2] = "bluestone.xpm";
-	while (i < 3)
+	texture->path[3] = "redbrick.xpm";
+	while (i < 4)
 	{
 		texture->img_ptr[i] = mlx_xpm_file_to_image(game->mlx, texture->path[i],
 				&texture->width, &texture->height);

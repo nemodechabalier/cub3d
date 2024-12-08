@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:42:24 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/11/13 17:44:20 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/12/08 13:23:21 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	ft_empty(char *str)
 	}
 	return (TRUE);
 }
+
 int	is_map(char *str)
 {
 	int i;

@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:54:52 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/05 20:35:44 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/08 20:25:12 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	draw_game(t_map *map)
 	int	x;
 
 	x = 0;
-	transpose_text(map->game->text->addr, 3);
 	draw_background(map);
 	while (x < SCREEN_WIDTH)
 	{
@@ -38,11 +37,10 @@ void	draw_wall(t_map *map, int *color, int tex_x, int tex_y)
 
 void	draw_background(t_map *map)
 {
-	int		x;
-	int		y;
 	char	*dst;
 
-	y = 0;
+	int(x) = 0;
+	int(y) = 0;
 	while (y < SCREEN_HEIGHT)
 	{
 		x = 0;
@@ -50,70 +48,74 @@ void	draw_background(t_map *map)
 		{
 			dst = map->addr + (y * map->line_length + x * (map->bits_per_pixel
 						/ 8));
-			*(unsigned int *)dst = 0x292929;
-			x++;
-		}
-		y++;
-	}
-	y = SCREEN_HEIGHT / 2;
-	while (y < SCREEN_HEIGHT)
-	{
-		x = 0;
-		while (x < SCREEN_WIDTH)
-		{
-			dst = map->addr + (y * map->line_length + x * (map->bits_per_pixel
-						/ 8));
-			*(unsigned int *)dst = 0x303030;
+			if (y < SCREEN_HEIGHT / 2)
+			{
+				if (((x / 4) + (y / 4)) % 2 == 0)
+					*(unsigned int *)dst = CEILING_COLOR1;
+				else
+					*(unsigned int *)dst = CEILING_COLOR2;
+			}
+			else
+			{
+				*(unsigned int *)dst = FLOOR_COLOR;
+			}
 			x++;
 		}
 		y++;
 	}
 }
 
-// les deux fonctions suivantes c'est pour afficher la map en petit si on veut
+void	draw_rectangle(t_map *map, int mini_screen_x, int mini_screen_y,
+		unsigned int color, int mini_size)
+{
+	char	*dst;
+	float	mini_y;
+	float	mini_x;
 
-// void	draw_rectangle(t_map *map, int x, int y, int size, int color)
-//{
-//	int i, j;
-//	i = 0;
-//	while (i < size)
-//	{
-//		j = 0;
-//		while (j < size)
-//		{
-//			mlx_pixel_put(map->game->mlx, map->game->mlx_win, x + j, y + i,
-//				color);
-//			j++;
-//		}
-//		i++;
-//	}
-//}
+	mini_y = mini_screen_y;
+	while (mini_y < mini_screen_y + mini_size)
+	{
+		mini_x = mini_screen_x;
+		while (mini_x < mini_screen_x + mini_size)
+		{
+			dst = map->addr + (int)(mini_y * map->line_length + mini_x
+					* (map->bits_per_pixel / 8));
+			*(unsigned int *)dst = color;
+			mini_x++;
+		}
+		mini_y++;
+	}
+}
 
-// void	draw_background(t_map *map)
-//{
-//	int	rect_size;
+void	draw_minimap(t_map *map, int minimap_size)
+{
+	float			mini_size;
+	int				mini_screen_x;
+	int				mini_screen_y;
+	unsigned int	color;
+	int				x;
+	int				y;
 
-//	rect_size = 10;
-//	int i, j;
-//	if (!map || !map->grid)
-//	{
-//		printf("Erreur : map ou grid non initialisé.\n");
-//		return ;
-//	}
-//	i = 0;
-//	while (i < map->height && map->grid[i] != (void *)0)
-//	{
-//		j = 0;
-//		while (j < map->length && map->grid[i][j] != '\0')
-//		{
-//			if (map->grid[i][j] == '1')
-//				draw_rectangle(map, j * rect_size, i * rect_size, rect_size,
-//								0xFF0000); // Rouge
-//			else if (map->grid[i][j] == '0')
-//				draw_rectangle(map, j * rect_size, i * rect_size, rect_size,
-//								0x0000FF); // Bleu
-//			j++;
-//		}
-//		i++;
-//	}
-//}
+	mini_size = minimap_size / (float)map->length;
+	y = 0;
+	while (y < map->height)
+	{
+		x = 0;
+		while (x < map->length)
+		{
+			mini_screen_x = x * mini_size;
+			mini_screen_y = y * mini_size;
+			if (map->grid[y][x] == '1')
+				color = 0x505050;
+			else if (map->grid[y][x] == '0')
+				color = 0x202020;
+			else if (map->grid[y][x] == ' ')
+				color = 0x000000;
+			else
+				break ;
+			draw_rectangle(map, mini_screen_x, mini_screen_y, color, mini_size);
+			x++;
+		}
+		y++;
+	}
+}

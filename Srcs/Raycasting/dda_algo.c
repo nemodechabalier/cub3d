@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:46:11 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/08 12:56:47 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/08 16:57:02 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	calcul_ray_dir(t_player *player, int x)
 	float	camera_x;
 
 	camera_x = 2 * x / (float)SCREEN_WIDTH - 1;
-	// printf("Camera_x %f\nDir_x %f\nPlane_x %f\n", camera_x, player->dir_x,
-	//	player->dir_y);
 	player->dda->ray_dir_x = player->dir_x + player->plane_x * camera_x;
 	player->dda->ray_dir_y = player->dir_y + player->plane_y * camera_x;
 	if (player->dda->ray_dir_x == 0)
@@ -102,6 +100,11 @@ int	start_algo_dda(t_map *map, t_player *player, int x)
 	calcul_ray_dir(player, x);
 	init_dda(player);
 	player->dda->hit = 0;
+	if (player->dda->map_x < 0 || player->dda->map_x >= map->length
+		|| player->dda->map_y < 0 || player->dda->map_y >= map->height
+		|| !map->grid[player->dda->map_x]
+		|| map->grid[player->dda->map_x][player->dda->map_y] == '\n')
+		return (printf("Error limit map\n"), 1);
 	while (player->dda->hit == 0)
 	{
 		if (player->dda->side_dist_x < player->dda->side_dist_y)
@@ -116,12 +119,6 @@ int	start_algo_dda(t_map *map, t_player *player, int x)
 			player->dda->map_y += player->dda->step_y;
 			player->dda->side = 1;
 		}
-		//if (player->dda->map_x < 0 || player->dda->map_x >= map->length
-		//	|| player->dda->map_y < 0 || player->dda->map_y >= map->height)
-		//{
-		//	printf("Error limit map\n");
-		//	return (1);
-		//}
 		if (map->grid[player->dda->map_x][player->dda->map_y] == '1')
 		{
 			player->dda->hit = 1;
@@ -132,19 +129,3 @@ int	start_algo_dda(t_map *map, t_player *player, int x)
 	return (0);
 }
 
-int	render(t_map *map)
-{
-	if (map->img_ptr)
-		mlx_destroy_image(map->game->mlx, map->img_ptr);
-	map->img_ptr = mlx_new_image(map->game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
-	if (!map->img_ptr)
-		return (1);
-	map->addr = mlx_get_data_addr(map->img_ptr, &map->bits_per_pixel,
-			&map->line_length, &map->endian);
-	if (!map->game->player)
-		return (1);
-	draw_game(map);
-	mlx_put_image_to_window(map->game->mlx, map->game->mlx_win, map->img_ptr, 0,
-		0);
-	return (0);
-}

@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:45:42 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/05 20:33:04 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/08 20:27:46 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@
 # define DEG_TO_RAD (M_PI / 180.0) // pour convertir de degres a radian
 # define texWidth 64
 # define texHeight 64
+# define CEILING_COLOR1 0x140A0A
+# define CEILING_COLOR2 0x383838
+# define FLOOR_COLOR 0x101010
 
 typedef struct s_calcul_table	t_calcul_table;
 typedef struct s_dda			t_dda;
@@ -89,11 +92,11 @@ typedef struct s_game
 
 typedef struct s_texture
 {
-	void						*img_ptr[3];
-	char						*path[3];
+	void						*img_ptr[4];
+	char						*path[4];
 	int							width;
 	int							height;
-	char						*addr[3];
+	char						*addr[4];
 	int							bits_per_pixel;
 	int							line_length;
 	int							endian;
@@ -145,7 +148,7 @@ void							draw_wall(t_map *map, int *color, int tex_x,
 									int tex_y);
 void							get_texture_position(t_map *map,
 									t_player *player, int x);
-void							transpose_text(char **textures, int tex_count);
+void							draw_minimap(t_map *map, int minimap_size);
 
 // free
 void							ft_free_map(t_map *map);
