@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_strcut.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 20:06:17 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/10 18:12:14 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/12/10 19:25:20 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_player	*ft_init_player(t_calcul_table *table, t_player *player)
 	int	i;
 
 	i = 0;
-	player->pos_x = 12.5;
+	player->pos_x = 10.5;
 	player->pos_y = 10.5;
 	player->dir_x = -1.0;
 	player->dir_y = 0.0;

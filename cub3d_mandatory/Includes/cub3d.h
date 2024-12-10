@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:45:42 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/10 18:13:22 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/12/10 19:28:21 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@
 //# define RAD_TO_DEG (180.0 / M_PI) // pour convertir de radian a degres
 # define RAD_TO_DEG (TABLE_SIZE / (2 * M_PI))
 # define DEG_TO_RAD (M_PI / 180.0) // pour convertir de degres a radian
-# define texWidth 64
-# define texHeight 64
+# define texWidth 256
+# define texHeight 256
 # define CEILING_COLOR1 0x140A0A
 # define CEILING_COLOR2 0x101010
 # define FLOOR_COLOR 0x101010
