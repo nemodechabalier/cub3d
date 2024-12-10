@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:18:29 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/08 20:26:40 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/10 14:17:04 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	init_game(t_map *map)
 	mlx_loop_hook(map->game->mlx, &render, map);
 	mlx_hook(map->game->mlx_win, 2, 1, &move_player, map);
 	mlx_hook(map->game->mlx_win, 17, 0, close_window, map);
+	//mlx_mouse_hook(map->game->mlx_win, appelle_func_pour_souris, map);
 	mlx_loop(map->game->mlx);
 	close_window(map);
 	return (SUCCESS);
@@ -47,5 +48,3 @@ int	render(t_map *map)
 		0);
 	return (0);
 }
-
-// mlx_mouse_hook ( void *win_ptr, int (*funct_ptr)(), void *param );

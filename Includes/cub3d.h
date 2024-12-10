@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:45:42 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/08 20:27:46 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/09 12:39:30 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@
 # define texWidth 64
 # define texHeight 64
 # define CEILING_COLOR1 0x140A0A
-# define CEILING_COLOR2 0x383838
+# define CEILING_COLOR2 0x101010
 # define FLOOR_COLOR 0x101010
+# define RECTANGLE_WIDTH 150
+# define RECTANGLE_HEIGHT 50
 
 typedef struct s_calcul_table	t_calcul_table;
 typedef struct s_dda			t_dda;
@@ -100,6 +102,10 @@ typedef struct s_texture
 	int							bits_per_pixel;
 	int							line_length;
 	int							endian;
+	//int							north;
+	//int							south;
+	//int							west;
+	//int							est;
 }								t_texture;
 
 typedef struct s_map

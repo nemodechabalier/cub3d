@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 10:59:14 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/08 18:59:24 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/09 14:58:03 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_map	*copy_map(t_map *map, char **file, int file_height, int file_length)
 
 	if (!file)
 		return (NULL);
-	map->grid = malloc(sizeof(char *) * (file_height + 1));
+	map->grid = malloc(sizeof(char *) * (file_height));
 	if (!map->grid)
 		return (free(map->grid), free(map), NULL);
 	i = 0;

@@ -6,25 +6,31 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 09:57:35 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/08 20:29:35 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:51:17 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/cub3d.h"
 
-int valid_move(double x, double y, t_map *map)
+int	valid_move(double x, double y, t_map *map)
 {
-    int grid_x = (int)x;
-    int grid_y = (int)y;
+	int	grid_x;
+	int	grid_y;
 
-    if (grid_x < 0 || grid_x >= map->length || 
-        grid_y < 0 || grid_y >= map->height)
-        return (FAIL);
+	grid_x = (int)(x + 0.01);
+	grid_y = (int)(y + 0.01);
+	if (grid_x < 0 || grid_x >= map->length || grid_y < 0
+		|| grid_y >= map->height)
+		return (FAIL);
 	// pk ca ne fonction pas avec '1' ?
-    if (map->grid[grid_y][grid_x] == '\0')
-        return (FAIL);
-
-    return (SUCCESS);
+	if (map->grid[grid_y][grid_x] == '\0')
+	{
+		printf("Checking position: x = %f, y = %f\n", x, y);
+		printf("grid_x = %d, grid_y = %d\n", grid_x, grid_y);
+		printf("map value: %c\n", map->grid[grid_y][grid_x]);
+		return (FAIL);
+	}
+	return (SUCCESS);
 }
 
 int	get_table_index(float angle)
@@ -48,18 +54,16 @@ int	move_player_dir(t_map *map, t_player *player, int move_forward)
 	double	next_pos_x;
 	double	next_pos_y;
 
-	speed = 0.08;
+	speed = 0.1;
 	move_speed = speed * (move_forward ? 1 : -1);
 	next_pos_x = player->pos_x + player->dir_x * move_speed;
 	next_pos_y = player->pos_y + player->dir_y * move_speed;
-	if (valid_move((int)next_pos_x, (int)player->pos_y, map) == SUCCESS)
+	//printf("Pos de x = %f\nPos de y = %f\n", player->pos_x, player->pos_y);
+	//printf("Next pos de x = %f\nNext pos de y = %f\n", next_pos_x, next_pos_y);
+	if (valid_move(next_pos_x, player->pos_y, map) == SUCCESS)
 		player->pos_x = next_pos_x;
-	else
-		return (printf("Player next pos x: %f\n", player->pos_x), FAIL);
-	if (valid_move((int)player->pos_x, (int)next_pos_y, map) == SUCCESS)
+	if (valid_move(player->pos_x, next_pos_y, map) == SUCCESS)
 		player->pos_y = next_pos_y;
-	else
-		return (printf("Player next pos y: %f\n", player->pos_y), FAIL);
 	return (SUCCESS);
 }
 
@@ -92,9 +96,34 @@ void	ft_rotate_player(t_player *player, float rotation_angle,
 		move_player_dir(map, player, 1);
 }
 
+void	open_wall(t_map *map)
+{
+	int	x;
+	int	y;
+
+	x = map->game->player->dda->map_x;
+	y = map->game->player->dda->map_y;
+	//x = map->game->player->pos_x;
+	//y = map->game->player->pos_y;
+	if (x + 2 < map->length && map->grid[x][y] == '1' && map->grid[x
+		+ 1][y] == '0' && map->grid[x + 2][y] != '\0')
+		map->grid[x][y] = '0';
+	if (x - 2 >= 0 && map->grid[x][y] == '1' && map->grid[x - 1][y] == '0'
+		&& map->grid[x - 2][y] != '\0')
+		map->grid[x][y] = '0';
+	if (y + 2 < map->height && map->grid[x][y] == '1' && map->grid[x][y
+		+ 1] == '0' && map->grid[x][y + 2] != '\0')
+		map->grid[x][y] = '0';
+	if (y - 2 >= 0 && map->grid[x][y] == '1' && map->grid[x][y - 1] == '0'
+		&& map->grid[x][y - 2] != '\0')
+		map->grid[x][y] = '0';
+}
+
 int	move_player(int keycode, t_map *map)
 {
-	t_player *player = map->game->player;
+	t_player	*player;
+
+	player = map->game->player;
 	if (!map->game->player->table)
 		return (printf("Error: player->table is NULL\n"), FAIL);
 	if (!map)
@@ -110,11 +139,11 @@ int	move_player(int keycode, t_map *map)
 	else if ((keycode == 's' || keycode == 'S') || keycode == 65364)
 		move_player_dir(map, player, 0);
 	else if ((keycode == 'a' || keycode == 'A') || keycode == 65361)
-		ft_rotate_player(player, 0.1f, player->table, 1,
-			map);
+		ft_rotate_player(player, 0.1f, player->table, 1, map);
 	else if ((keycode == 'd' || keycode == 'D') || keycode == 65363)
-		ft_rotate_player(player, -0.1f, player->table, 1,
-			map);
+		ft_rotate_player(player, -0.1f, player->table, 1, map);
+	// else if (keycode == 32)
+	//	open_wall(map);
 	else
 		return (FAIL);
 	return (SUCCESS);

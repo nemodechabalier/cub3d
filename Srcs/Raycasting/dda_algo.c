@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:46:11 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/08 16:57:02 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/09 14:50:44 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,6 @@ int	start_algo_dda(t_map *map, t_player *player, int x)
 	calcul_ray_dir(player, x);
 	init_dda(player);
 	player->dda->hit = 0;
-	if (player->dda->map_x < 0 || player->dda->map_x >= map->length
-		|| player->dda->map_y < 0 || player->dda->map_y >= map->height
-		|| !map->grid[player->dda->map_x]
-		|| map->grid[player->dda->map_x][player->dda->map_y] == '\n')
-		return (printf("Error limit map\n"), 1);
 	while (player->dda->hit == 0)
 	{
 		if (player->dda->side_dist_x < player->dda->side_dist_y)
@@ -119,6 +114,12 @@ int	start_algo_dda(t_map *map, t_player *player, int x)
 			player->dda->map_y += player->dda->step_y;
 			player->dda->side = 1;
 		}
+		if (player->dda->map_x < 0 || player->dda->map_x >= map->length
+			|| player->dda->map_y < 0 || player->dda->map_y >= map->height
+			|| !map->grid[player->dda->map_x]
+			|| map->grid[player->dda->map_x][player->dda->map_y] == '\0')
+			//return (printf("Error limit map\n"), 1);
+			return (1);
 		if (map->grid[player->dda->map_x][player->dda->map_y] == '1')
 		{
 			player->dda->hit = 1;
@@ -128,4 +129,3 @@ int	start_algo_dda(t_map *map, t_player *player, int x)
 	chose_dist(player);
 	return (0);
 }
-
