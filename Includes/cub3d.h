@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:45:42 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/09 12:39:30 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:13:22 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,10 @@ typedef struct s_texture
 	int							bits_per_pixel;
 	int							line_length;
 	int							endian;
-	//int							north;
-	//int							south;
-	//int							west;
-	//int							est;
+	// int							north;
+	// int							south;
+	// int							west;
+	// int							est;
 }								t_texture;
 
 typedef struct s_map
@@ -143,7 +143,7 @@ t_texture						*ft_init_texture(t_game *game,
 // dda
 int								start_algo_dda(t_map *map, t_player *player,
 									int x);
-int								init_game(t_map *map);
+int								init_game(t_map *map, t_file *file);
 int								render(t_map *map);
 
 // mlx
@@ -160,4 +160,6 @@ void							draw_minimap(t_map *map, int minimap_size);
 void							ft_free_map(t_map *map);
 int								close_window(t_map *map);
 void							ft_free_data(t_game *game);
+t_texture						*texture_constructor(t_file *file);
+
 #endif

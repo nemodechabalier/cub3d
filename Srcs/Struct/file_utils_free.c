@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_utils_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 19:02:09 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/11/23 12:44:21 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:31:59 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_file	*t_file_creator(void)
 	return (file);
 }
 
-void	t_file_dest(t_file *file)
+void	file_dest(t_file *file)
 {
 	if (file->map)
 		free_strs(file->map);

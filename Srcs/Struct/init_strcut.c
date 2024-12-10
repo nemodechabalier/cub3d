@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_strcut.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 20:06:17 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/04 16:40:31 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:12:14 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	define_fov(t_player *player)
 
 t_player	*ft_init_player(t_calcul_table *table, t_player *player)
 {
-	int			i;
+	int	i;
 
 	i = 0;
 	player->pos_x = 12.5;
@@ -71,7 +71,7 @@ t_player	*ft_init_player(t_calcul_table *table, t_player *player)
 	player->plane_x = 0.0;
 	player->plane_y = 0.66;
 	define_fov(player);
-	//player->speed = 0.05;
+	// player->speed = 0.05;
 	player->table = table;
 	player->dda = ft_init_dda();
 	if (!player->dda)
@@ -106,4 +106,27 @@ t_dda	*ft_init_dda(void)
 	dda->perp_wall_dist = 0;
 	dda->side = 0;
 	return (dda);
+}
+
+t_texture	*texture_constructor(t_file *file)
+{
+	t_texture *text;
+
+	text = malloc(sizeof(t_texture));
+	if (!text)
+		return (NULL);
+	int i = 0;
+	while (file->texture[i])
+	{
+		if (file->texture[i][0] == 'N')
+			text->path[0] = file->texture[i];
+		if (file->texture[i][0] == 'S')
+			text->path[1] = file->texture[i];
+		if (file->texture[i][0] == 'E')
+			text->path[2] = file->texture[i];
+		if (file->texture[i][0] == 'W')
+			text->path[3] = file->texture[i];
+		i++;
+	}
+	return (text);
 }

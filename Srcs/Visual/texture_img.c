@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_img.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:50:16 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/10 15:23:46 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:22:38 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,13 @@ t_texture	*ft_init_texture(t_game *game, t_texture *texture)
 		return (free(game), NULL);
 	texture->height = texHeight;
 	texture->width = texWidth;
-	texture->path[0] = "Text/marbel.xpm";
-	texture->path[1] = "Text/wall.xpm";
-	texture->path[2] = "Text/rough_wall.xpm";
-	texture->path[3] = "Text/metal_wall.xpm";
+	//texture->path[0] = "Text/marbel.xpm";//NO
+	//texture->path[1] = "Text/wall.xpm";//SU
+	//texture->path[2] = "Text/rough_wall.xpm";//EA
+	//texture->path[3] = "Text/redbrick.xpm";//WE
 	while (i < 4)
 	{
-		texture->img_ptr[i] = mlx_xpm_file_to_image(game->mlx, texture->path[i],
+		texture->img_ptr[i] = mlx_xpm_file_to_image(game->mlx, texture->path[i] + 3,
 				&texture->width, &texture->height);
 		if (!texture->img_ptr[i])
 			return (printf("Error loading texture %s\n", texture->path[i]),

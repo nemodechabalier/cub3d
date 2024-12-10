@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:43:22 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/11/22 12:08:56 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:19:53 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (printf("wrong nb args\n"), -1);
 	file = take_file(av[1]);
+	if (!file)
+		return (0);
 	map = return_value_file(file->map);
-	init_game(map);
+	init_game(map, file);
 	return (0);
 }
 

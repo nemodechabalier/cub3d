@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda_algo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:46:11 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/09 14:50:44 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:40:24 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,12 +115,10 @@ int	start_algo_dda(t_map *map, t_player *player, int x)
 			player->dda->side = 1;
 		}
 		if (player->dda->map_x < 0 || player->dda->map_x >= map->length
-			|| player->dda->map_y < 0 || player->dda->map_y >= map->height
-			|| !map->grid[player->dda->map_x]
-			|| map->grid[player->dda->map_x][player->dda->map_y] == '\0')
+			|| player->dda->map_y < 0 || player->dda->map_y >= map->height)
 			//return (printf("Error limit map\n"), 1);
 			return (1);
-		if (map->grid[player->dda->map_x][player->dda->map_y] == '1')
+		if (map->grid[player->dda->map_y][player->dda->map_x] == '1')
 		{
 			player->dda->hit = 1;
 			break ;

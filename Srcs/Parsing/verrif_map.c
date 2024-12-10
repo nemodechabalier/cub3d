@@ -6,7 +6,7 @@
 /*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:00 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/11/19 18:57:16 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:34:06 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ int	map_double(t_file *file)
 		}
 		i++;
 	}
-	if (nb != 1)
-		return (printf("Error\ntoo many player"), 1);
+	if (nb > 1)
+		return (printf("Error\ntoo many player\n"), 1);
+	if (nb < 1)
+		return (printf("Error\nno player\n"), 1);
 	return (0);
 }
 
@@ -73,6 +75,5 @@ int	map_verrif(t_file *file)
 		}
 		i++;
 	}
-	printf("map ok :)\n");
 	return (0);
 }

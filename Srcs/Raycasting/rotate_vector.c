@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate_vector.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 09:57:35 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/10 15:51:17 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:57:25 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int	move_player_dir(t_map *map, t_player *player, int move_forward)
 void	ft_rotate_player(t_player *player, float rotation_angle,
 		t_calcul_table *table, int move_forward, t_map *map)
 {
+	(void) move_forward;
+	(void) map;
 	float	old_dir_x;
 	float	old_dir_y;
 	float	old_plane_x;
@@ -92,8 +94,8 @@ void	ft_rotate_player(t_player *player, float rotation_angle,
 	player->plane_x = old_plane_x * cos_rot - old_plane_y * sin_rot;
 	player->plane_y = old_plane_x * sin_rot + old_plane_y * cos_rot;
 	player->angle += rotation_angle;
-	if (move_forward)
-		move_player_dir(map, player, 1);
+	//if (move_forward)
+	//	move_player_dir(map, player, 1);
 }
 
 void	open_wall(t_map *map)

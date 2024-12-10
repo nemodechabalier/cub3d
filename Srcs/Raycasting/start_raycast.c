@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   start_raycast.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:18:29 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/10 14:17:04 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:12:52 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/cub3d.h"
 
-int	init_game(t_map *map)
+int	init_game(t_map *map, t_file *file)
 {
 	t_texture	*texture;
 
-	texture = malloc(sizeof(t_texture) * 2);
+	texture = texture_constructor(file);
 	if (!texture)
-		return FAIL;
+		return (FAIL);
 	map->game->text = ft_init_texture(map->game, texture);
 	if (!map->game->text)
-		return FAIL;
+		return (FAIL);
 	mlx_loop_hook(map->game->mlx, &render, map);
 	mlx_hook(map->game->mlx_win, 2, 1, &move_player, map);
 	mlx_hook(map->game->mlx_win, 17, 0, close_window, map);
-	//mlx_mouse_hook(map->game->mlx_win, appelle_func_pour_souris, map);
+	// mlx_mouse_hook(map->game->mlx_win, appelle_func_pour_souris, map);
 	mlx_loop(map->game->mlx);
 	close_window(map);
 	return (SUCCESS);

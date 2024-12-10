@@ -6,7 +6,7 @@
 /*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:57:33 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/11/19 16:24:27 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:03:51 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,5 @@ t_file	*verrif_texture(t_file *file, char **strs)
 		return (free(file->map), free(file), free_strs(strs), NULL);
 	if (double_texture(file) == FALSE || map_verrif(file))
 		return (free(file->map), free(file), free_strs(strs), NULL);
-	return (NULL);
+	return (RGB_verrif(file));
 }
