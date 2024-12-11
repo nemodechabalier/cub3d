@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_img.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:50:16 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/10 17:28:56 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/11 18:29:25 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,10 @@ t_texture	*ft_init_texture(t_game *game, t_texture *texture)
 		return (free(game), NULL);
 	texture->height = texHeight;
 	texture->width = texWidth;
-	texture->path[0] = "Text/bluestone_test.xpm";
-	texture->path[1] = "Text/wall_south.xpm";
-	texture->path[2] = "Text/rough_wall.xpm";
-	texture->path[3] = "Text/metal_wall.xpm";
+	//texture->path[0] = "Text/bluestone_test.xpm";
+	//texture->path[1] = "Text/wall_south.xpm";
+	//texture->path[2] = "Text/rough_wall.xpm";
+	//texture->path[3] = "Text/metal_wall.xpm";
 	while (i < 4)
 	{
 		texture->img_ptr[i] = mlx_xpm_file_to_image(game->mlx, texture->path[i],

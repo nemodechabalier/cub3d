@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_strcut.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 20:06:17 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/11 11:27:53 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/11 18:51:06 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,29 @@ void	init_player_dir_plane(t_player *player, char **file)
 		i++;
 	}
 }
+void	init_position(t_player *player, char **file)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (file[i])
+	{
+		j = 0;
+		while (file[i][j])
+		{
+			if (file[i][j] == 'N' || file[i][j] == 'E' || file[i][j] == 'W'
+				|| file[i][j] == 'S')
+			{
+				player->pos_x = j + 0.5;
+				player->pos_y = i + 0.5;
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
 
 t_player	*ft_init_player(t_calcul_table *table, t_player *player,
 		char **file)
@@ -112,6 +135,7 @@ t_player	*ft_init_player(t_calcul_table *table, t_player *player,
 	(void)file;
 	player->pos_x = 10.5;
 	player->pos_y = 10.5;
+	init_position(player, file);
 	init_player_dir_plane(player, file);
 	printf("dir y = %f dir y = %f\n", player->dir_x, player->dir_y);
 	define_fov(player);

@@ -6,7 +6,7 @@
 /*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:57:33 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/12/10 17:03:51 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:52:25 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ int	cut_texture(t_file *file)
 t_file	*verrif_texture(t_file *file, char **strs)
 {
 	if (cut_texture(file) == FALSE)
-		return (free(file->map), free(file), free_strs(strs), NULL);
+		return (free(file->map), free(file), free_strs(strs, 1), NULL);
 	if (double_texture(file) == FALSE || map_verrif(file))
-		return (free(file->map), free(file), free_strs(strs), NULL);
+		return (free(file->map), free(file), free_strs(strs, 1), NULL);
 	return (RGB_verrif(file));
 }

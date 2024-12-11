@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   free_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:50:42 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/12/05 19:24:39 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:50:05 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/cub3d.h"
 
-void	free_strs(char **strs)
+void	free_strs(char **strs, int bool)
 {
 	int	i;
 
@@ -23,7 +23,8 @@ void	free_strs(char **strs)
 		strs[i] = NULL;
 		i++;
 	}
-	free(strs);
+	if (bool)
+		free(strs);
 	strs = NULL;
 }
 

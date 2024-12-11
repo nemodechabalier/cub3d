@@ -6,7 +6,7 @@
 /*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 17:44:16 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/12/10 18:46:46 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/12/11 18:04:03 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,14 +117,12 @@ t_file	*cut_file(char **strs)
 
 	file = t_file_creator();
 	if (!file)
-		return (free_strs(strs), NULL);
+		return (free_strs(strs,1), NULL);
 	file = take_texture(file, strs);
 	if (!file)
-		return (free_strs(strs), NULL);
+		return (free_strs(strs,1), NULL);
 	file = take_map(strs, file);
 	if (!file)
-		return (free_strs(strs), NULL);
-	file = verrif_texture(file, strs);
-	//free_file(strs);
-	return(file);
+		return (free_strs(strs,1), NULL);
+	return(verrif_texture(file, strs));
 }

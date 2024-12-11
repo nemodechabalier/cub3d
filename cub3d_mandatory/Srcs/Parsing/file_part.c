@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_part.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:48:14 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/11/18 18:45:20 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:51:28 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ char	**read_file(char *file_name, int nb_line)
 	while (line)
 	{
 		if (i == nb_line)
-			return (file[i] = NULL, free_strs(file), printf("error malloc\n"),
-				NULL);
+			return (file[i] = NULL, free_strs(file, 1),
+				printf("error malloc\n"), NULL);
 		file[i] = line;
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
@@ -92,5 +92,5 @@ t_file	*take_file(char *file_name)
 	if (!strs)
 		return (printf("strs == NULL\n"), NULL);
 	else
-		return(cut_file(strs));
+		return (cut_file(strs));
 }
