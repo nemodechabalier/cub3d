@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verrif_RGB.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:02:46 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/12/10 18:32:34 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/12/11 14:49:44 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ int	RGB_take(int *FC, char *RGB)
 		i++;
 	i++;
 	FC[1] = ft_atorgb(RGB + i);
-	i++;
 	while (RGB[i] != ',' && RGB[i])
 		i++;
+	i++;
 	FC[2] = ft_atorgb(RGB + i);
 	i = 0;
 	while (i < 3)
