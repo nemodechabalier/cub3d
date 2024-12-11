@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda_algo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:46:11 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/10 18:40:24 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/12/11 12:59:18 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,30 +69,24 @@ void	init_dda(t_player *player)
 	}
 }
 
-// void	continue_algo(t_player *player)
-//{
-//	if (player->dda->side_dist_x < player->dda->side_dist_y)
-//	{
-//		player->dda->side_dist_x += player->dda->delta_dist_x;
-//		player->dda->map_x += player->dda->step_x;
-//		player->dda->side = 0;
-//	}
-//	else
-//	{
-//		player->dda->side_dist_y += player->dda->delta_dist_y;
-//		player->dda->map_y += player->dda->step_y;
-//		player->dda->side = 1;
-//	}
-//}
-
 void	chose_dist(t_player *player)
 {
+	// double	ray_angle;
+	// double	player_angle;
 	if (player->dda->side == 0)
 		player->dda->perp_wall_dist = (player->dda->side_dist_x
 				- player->dda->delta_dist_x);
 	else
 		player->dda->perp_wall_dist = (player->dda->side_dist_y
 				- player->dda->delta_dist_y);
+	// ray_angle = atan2(player->dda->ray_dir_y, player->dda->ray_dir_x);
+	// player_angle = atan2(player->dir_y, player->dir_x);
+	// player->dda->perp_wall_dist *= cos(ray_angle - player_angle);
+	// double camera_x = 2.0 * player->plane_y / (float)SCREEN_WIDTH - 1.0;
+	// player->dda->perp_wall_dist *= sqrt(1 + camera_x * camera_x);
+	// double cos_correction = player->dir_x * player->dda->ray_dir_x +
+	//                    player->dir_y * player->dda->ray_dir_y;
+	// player->dda->perp_wall_dist *= cos_correction;
 }
 
 int	start_algo_dda(t_map *map, t_player *player, int x)
@@ -116,7 +110,7 @@ int	start_algo_dda(t_map *map, t_player *player, int x)
 		}
 		if (player->dda->map_x < 0 || player->dda->map_x >= map->length
 			|| player->dda->map_y < 0 || player->dda->map_y >= map->height)
-			//return (printf("Error limit map\n"), 1);
+			// return (printf("Error limit map\n"), 1);
 			return (1);
 		if (map->grid[player->dda->map_y][player->dda->map_x] == '1')
 		{

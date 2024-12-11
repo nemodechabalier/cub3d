@@ -6,13 +6,13 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 10:59:14 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/09 14:58:03 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/11 14:16:35 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/cub3d.h"
 
-t_map	*return_value_file(char **file)
+t_map	*return_value_file(char **file, t_file *files)
 {
 	int		file_height;
 	int		file_length;
@@ -35,15 +35,17 @@ t_map	*return_value_file(char **file)
 			file_length = map->line_length;
 		i++;
 	}
-	if (!copy_map(map, file, file_height, file_length))
+	if (!copy_map(map, file, file_height, file_length, files))
 		return (free(map), NULL);
 	return (map);
 }
 
-t_map	*copy_map(t_map *map, char **file, int file_height, int file_length)
+t_map	*copy_map(t_map *map, char **file, int file_height, int file_length,
+		t_file *files)
 {
 	int	i;
 
+	(void)files;
 	if (!file)
 		return (NULL);
 	map->grid = malloc(sizeof(char *) * (file_height));
@@ -58,16 +60,17 @@ t_map	*copy_map(t_map *map, char **file, int file_height, int file_length)
 	map->img_ptr = NULL;
 	map->height = file_height;
 	map->length = file_length;
-	map->addr = NULL;
-	map->bits_per_pixel = 0;
-	map->endian = 0;
-	map->game = ft_init_game_data();
+	map->color[0] = create_color_ceiling(files);
+	map->color[1] = create_color_floor(files);
+	printf("Color Ceiling: %#010x\n", create_color_ceiling(files));
+	printf("Color Floor: %#010x\n", create_color_floor(files));
+	map->game = ft_init_game_data(file);
 	if (!map->game)
 		return (free(map->game), free(map), NULL);
 	return (map);
 }
 
-t_game	*ft_init_game_data(void)
+t_game	*ft_init_game_data(char **file)
 {
 	t_game			*game;
 	t_player		*player;
@@ -85,7 +88,7 @@ t_game	*ft_init_game_data(void)
 	game->table = ft_init_calcul(table);
 	if (!game->table)
 		return (ft_free_data(game), NULL);
-	game->player = ft_init_player(table, player);
+	game->player = ft_init_player(table, player, file);
 	if (!game->player)
 		return (ft_free_data(game), NULL);
 	return (game);

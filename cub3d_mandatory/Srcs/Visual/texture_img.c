@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_img.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:50:16 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/10 18:22:38 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/12/11 12:48:04 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,9 @@ void	get_texture_position(t_map *map, t_player *player, int x)
 	double		texPos;
 	int			*color;
 	int			tex_index;
-	int			sub_texture_x;
+	//int			sub_texture_x;
 
 	texture = map->game->text;
-	//Nord : ray_dir_x < 0ray_dir_x < 0 lorsque side==0 side==0.
-	//Sud : ray_dir_x > 0 ray_dir_x > 0 lorsque side==0 side==0.
-	//Ouest : ray_dir_y < 0 ray_dir_y < 0 lorsque side==1side==1.
-	//Est : ray_dir_y > 0 ray_dir_y > 0 lorsque side==1side==1.
 	if (player->dda->side == 0)
 	{
 		if (player->dda->ray_dir_x > 0)
@@ -45,6 +41,7 @@ void	get_texture_position(t_map *map, t_player *player, int x)
 			tex_index = 0;
 		wall_x = player->pos_y + player->dda->perp_wall_dist
 			* player->dda->ray_dir_y;
+		wall_x -= floor(wall_x);
 	}
 	else
 	{
@@ -54,6 +51,7 @@ void	get_texture_position(t_map *map, t_player *player, int x)
 			tex_index = 3;
 		wall_x = player->pos_x + player->dda->perp_wall_dist
 			* player->dda->ray_dir_x;
+		wall_x -= floor(wall_x);
 	}
 	wall_x -= floor(wall_x);
 	texture_x = (int)(wall_x * (texWidth));
@@ -72,9 +70,9 @@ void	get_texture_position(t_map *map, t_player *player, int x)
 	{
 		texture_y = (int)texPos & (texHeight - 1);
 		texPos += step;
-		sub_texture_x = (int)(wall_x * texWidth) % texture->width;
+		//sub_texture_x = (int)(wall_x * texWidth) % texture->width;
 		color = (int *)(texture->addr[tex_index] + texture_y
-				* texture->line_length + sub_texture_x * (texture->bits_per_pixel
+				* texture->line_length + texture_x * (texture->bits_per_pixel
 					/ 8));
 		draw_wall(map, color, x, y);
 		y++;
@@ -93,10 +91,6 @@ t_texture	*ft_init_texture(t_game *game, t_texture *texture)
 		return (free(game), NULL);
 	texture->height = texHeight;
 	texture->width = texWidth;
-	//texture->path[0] = "Text/marbel.xpm";//NO
-	//texture->path[1] = "Text/wall.xpm";//SU
-	//texture->path[2] = "Text/rough_wall.xpm";//EA
-	//texture->path[3] = "Text/redbrick.xpm";//WE
 	while (i < 4)
 	{
 		texture->img_ptr[i] = mlx_xpm_file_to_image(game->mlx, texture->path[i] + 3,

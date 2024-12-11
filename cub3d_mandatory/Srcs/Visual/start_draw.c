@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:54:52 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/10 19:28:34 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/11 13:40:51 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ void	draw_background(t_map *map)
 {
 	char	*dst;
 
-	// int		rect_x;
-	// int		rect_y;
 	int(x) = 0;
 	int(y) = 0;
 	while (y < SCREEN_HEIGHT)
@@ -62,11 +60,11 @@ void	draw_background(t_map *map)
 				// if (rect_x + rect_y % 2 == 0)
 				//	*(unsigned int *)dst = CEILING_COLOR1;
 				// else
-				*(unsigned int *)dst = CEILING_COLOR2;
+				*(unsigned int *)dst = map->color[0];
 			}
 			else
 			{
-				*(unsigned int *)dst = FLOOR_COLOR;
+				*(unsigned int *)dst = map->color[1];
 			}
 			x++;
 		}
