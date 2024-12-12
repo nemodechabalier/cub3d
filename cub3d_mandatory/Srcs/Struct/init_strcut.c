@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_strcut.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 20:06:17 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/11 18:51:06 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/12/12 12:43:49 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,9 +132,6 @@ t_player	*ft_init_player(t_calcul_table *table, t_player *player,
 	int	i;
 
 	i = 0;
-	(void)file;
-	player->pos_x = 10.5;
-	player->pos_y = 10.5;
 	init_position(player, file);
 	init_player_dir_plane(player, file);
 	printf("dir y = %f dir y = %f\n", player->dir_x, player->dir_y);

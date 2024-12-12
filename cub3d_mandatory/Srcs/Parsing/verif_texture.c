@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verif_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:57:33 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/12/11 17:52:25 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/12/12 12:44:23 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,5 @@ t_file	*verrif_texture(t_file *file, char **strs)
 		return (free(file->map), free(file), free_strs(strs, 1), NULL);
 	if (double_texture(file) == FALSE || map_verrif(file))
 		return (free(file->map), free(file), free_strs(strs, 1), NULL);
-	return (RGB_verrif(file));
+	return (RGB_verrif(file, strs));
 }
