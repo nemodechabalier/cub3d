@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 09:57:35 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/11 12:13:53 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/12 13:00:18 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	move_player_dir(t_map *map, t_player *player, int move_forward)
 	double	next_pos_x;
 	double	next_pos_y;
 
-	speed = 0.1;
+	speed = 0.3;
 	move_speed = speed * (move_forward ? 1 : -1);
 	next_pos_x = player->pos_x + player->dir_x * move_speed;
 	next_pos_y = player->pos_y + player->dir_y * move_speed;
@@ -82,9 +82,7 @@ void	ft_rotate_player(t_player *player, float rotation_angle,
 		t_calcul_table *table)
 {
 	float	old_dir_x;
-	float	old_dir_y;
 	float	old_plane_x;
-	float	old_plane_y;
 	int		rot_index;
 	float	cos_rot;
 	float	sin_rot;
@@ -92,17 +90,20 @@ void	ft_rotate_player(t_player *player, float rotation_angle,
 	if (!player || !table)
 		return ;
 	old_dir_x = player->dir_x;
-	old_dir_y = player->dir_y;
 	old_plane_x = player->plane_x;
-	old_plane_y = player->plane_y;
 	rot_index = get_table_index(rotation_angle);
 	cos_rot = table->cos[rot_index];
 	sin_rot = table->sin[rot_index];
-	player->dir_x = old_dir_x * cos_rot - old_dir_y * sin_rot;
-	player->dir_y = old_dir_x * sin_rot + old_dir_y * cos_rot;
-	player->plane_x = old_plane_x * cos_rot - old_plane_y * sin_rot;
-	player->plane_y = old_plane_x * sin_rot + old_plane_y * cos_rot;
+	player->dir_x = player->dir_x * cos_rot - player->dir_y * sin_rot;
+    //printf("player->dir_x %f: \n", player->dir_x);
+	player->dir_y = old_dir_x * sin_rot + player->dir_y * cos_rot;
+    //printf("player->dir_y %f: \n", player->dir_y);
+	player->plane_x = player->plane_x * cos_rot - player->plane_y * sin_rot;
+    //printf("player->plane_x %f: \n", player->plane_x);
+	player->plane_y = old_plane_x * sin_rot + player->plane_y * cos_rot;
+    //printf("player->plane_y %f: \n", player->plane_y);
 	player->angle += rotation_angle;
+    //printf("player->angle %f: \n\n", player->angle);
 }
 
 int	move_player(int keycode, t_map *map)

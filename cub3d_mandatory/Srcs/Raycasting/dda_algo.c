@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:46:11 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/11 12:59:18 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/12 13:15:36 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,38 @@ void	chose_dist(t_player *player)
 	// player->dda->perp_wall_dist *= cos_correction;
 }
 
+void	debug_perpendicularity(t_player *player, int x)
+{
+	float	camera_x;
+	float	ray_dir_x;
+	float	ray_dir_y;
+	float	dot_product;
+
+	// Calcul de la direction du rayon
+	camera_x = 2 * x / (float)SCREEN_WIDTH - 1;
+	ray_dir_x = player->dir_x + player->plane_x * camera_x;
+	ray_dir_y = player->dir_y + player->plane_y * camera_x;
+	// Calculer le produit scalaire entre la direction du rayon et le plan de caméra
+	dot_product = ray_dir_x * player->plane_x + ray_dir_y * player->plane_y;
+	// Imprimer les informations de débogage
+	printf("ray_dir_x %f: \n", player->dda->ray_dir_x);
+    printf("ray_dir y %f: \n\n", player->dda->ray_dir_y);
+	printf("plane_x %f: \n", player->plane_x);
+    printf("plane_y %f: \n\n", player->plane_y);
+	printf("dir_x %f: \n", player->dir_x);
+    printf("dir_y %f: \n\n", player->dir_y);
+	printf("Ray %d: \n", x);
+	printf("  Ray Direction: (%.3f, %.3f)\n", ray_dir_x, ray_dir_y);
+	printf("  Camera Plane: (%.3f, %.3f)\n", player->plane_x, player->plane_y);
+	printf("  Dot Product: %.6f\n", dot_product);
+	// Vérifier la quasi-orthogonalité (proche de zéro)
+	if (fabs(dot_product) > 0.001)
+		printf("  WARNING: Ray not perpendicular to camera plane!\n");
+}
+
 int	start_algo_dda(t_map *map, t_player *player, int x)
 {
+	//debug_perpendicularity(player, x);
 	calcul_ray_dir(player, x);
 	init_dda(player);
 	player->dda->hit = 0;

@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:50:16 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/11 12:48:04 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/12 13:36:53 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,27 +54,28 @@ void	get_texture_position(t_map *map, t_player *player, int x)
 		wall_x -= floor(wall_x);
 	}
 	wall_x -= floor(wall_x);
-	texture_x = (int)(wall_x * (texWidth));
+	texture_x = (int)(wall_x * (double)texWidth) % texWidth;
 	line_height = (int)(SCREEN_HEIGHT / map->game->player->dda->perp_wall_dist
-			* 0.8);
+		* 0.8);
+	printf("line height = %d\n\n", line_height);
 	draw_start = -line_height / 2 + SCREEN_HEIGHT / 2;
 	if (draw_start < 0)
 		draw_start = 0;
 	draw_end = line_height / 2 + SCREEN_HEIGHT / 2;
-	if (draw_end >= SCREEN_HEIGHT)
-		draw_end = SCREEN_HEIGHT - 1;
+	if (draw_end > SCREEN_HEIGHT)
+		draw_end = SCREEN_HEIGHT;
 	step = 1.0 * texHeight / line_height;
-	texPos = (draw_start - SCREEN_HEIGHT / 2 + line_height / 2);
+	texPos = (draw_start - SCREEN_HEIGHT / 2 + line_height / 2) * step;
 	y = draw_start;
 	while (y < draw_end)
 	{
 		texture_y = (int)texPos & (texHeight - 1);
-		texPos += step;
 		//sub_texture_x = (int)(wall_x * texWidth) % texture->width;
 		color = (int *)(texture->addr[tex_index] + texture_y
 				* texture->line_length + texture_x * (texture->bits_per_pixel
 					/ 8));
 		draw_wall(map, color, x, y);
+		texPos += step;
 		y++;
 	}
 }

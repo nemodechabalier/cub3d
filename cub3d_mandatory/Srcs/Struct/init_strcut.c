@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 20:06:17 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/12 12:43:49 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/12 13:14:01 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void	init_player_dir_plane(t_player *player, char **file)
 		i++;
 	}
 }
+
 void	init_position(t_player *player, char **file)
 {
 	int	i;
@@ -129,9 +130,6 @@ void	init_position(t_player *player, char **file)
 t_player	*ft_init_player(t_calcul_table *table, t_player *player,
 		char **file)
 {
-	int	i;
-
-	i = 0;
 	init_position(player, file);
 	init_player_dir_plane(player, file);
 	printf("dir y = %f dir y = %f\n", player->dir_x, player->dir_y);
@@ -150,9 +148,7 @@ t_player	*ft_init_player(t_calcul_table *table, t_player *player,
 t_dda	*ft_init_dda(void)
 {
 	t_dda	*dda;
-	int		i;
 
-	i = 0;
 	dda = malloc(sizeof(t_dda));
 	if (!dda)
 		return (NULL);
