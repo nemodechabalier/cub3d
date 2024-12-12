@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:46:11 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/10 17:28:00 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/12 14:48:29 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,22 +69,6 @@ void	init_dda(t_player *player)
 	}
 }
 
-// void	continue_algo(t_player *player)
-//{
-//	if (player->dda->side_dist_x < player->dda->side_dist_y)
-//	{
-//		player->dda->side_dist_x += player->dda->delta_dist_x;
-//		player->dda->map_x += player->dda->step_x;
-//		player->dda->side = 0;
-//	}
-//	else
-//	{
-//		player->dda->side_dist_y += player->dda->delta_dist_y;
-//		player->dda->map_y += player->dda->step_y;
-//		player->dda->side = 1;
-//	}
-//}
-
 void	chose_dist(t_player *player)
 {
 	if (player->dda->side == 0)
@@ -115,12 +99,11 @@ int	start_algo_dda(t_map *map, t_player *player, int x)
 			player->dda->side = 1;
 		}
 		if (player->dda->map_x < 0 || player->dda->map_x >= map->length
-			|| player->dda->map_y < 0 || player->dda->map_y >= map->height
-			|| !map->grid[player->dda->map_x]
-			|| map->grid[player->dda->map_x][player->dda->map_y] == '\0')
-			//return (printf("Error limit map\n"), 1);
+			|| player->dda->map_y < 0 || player->dda->map_y >= map->height)
+			// return (printf("Error limit map\n"), 1);
 			return (1);
-		if (map->grid[player->dda->map_x][player->dda->map_y] == '1')
+		if (map->grid[player->dda->map_y][player->dda->map_x] == '1'
+			|| map->grid[player->dda->map_y][player->dda->map_x] == 'K')
 		{
 			player->dda->hit = 1;
 			break ;

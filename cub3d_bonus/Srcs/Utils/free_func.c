@@ -6,13 +6,13 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:50:42 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/12/10 17:28:34 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/12 14:06:18 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/cub3d_bonus.h"
 
-void	free_strs(char **strs)
+void	free_strs(char **strs, int bool)
 {
 	int	i;
 
@@ -23,7 +23,8 @@ void	free_strs(char **strs)
 		strs[i] = NULL;
 		i++;
 	}
-	free(strs);
+	if (bool)
+		free(strs);
 	strs = NULL;
 }
 
@@ -98,3 +99,4 @@ int	close_window(t_map *map)
 	exit(0);
 	return (0);
 }
+

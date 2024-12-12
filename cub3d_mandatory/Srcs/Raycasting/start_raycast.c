@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:18:29 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/11 13:59:06 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/12 14:41:08 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	render(t_map *map)
 	if (!map->game->player)
 		return (1);
 	draw_game(map);
-	draw_minimap(map, 150);
 	mlx_put_image_to_window(map->game->mlx, map->game->mlx_win, map->img_ptr, 0,
 		0);
 	return (0);

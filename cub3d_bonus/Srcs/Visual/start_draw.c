@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:54:52 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/10 17:28:51 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/12 14:46:09 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,6 @@ void	draw_game(t_map *map)
 	}
 }
 
-/*
-calculate the memory offset using the line length set by mlx_get_data_addr.
-We can calculate it very easily by using the following formula
-int		offset = (y * line_length + x * (bits_per_pixel / 8));
-*/
 void	draw_wall(t_map *map, int *color, int tex_x, int tex_y)
 {
 	char	*dest;
@@ -44,8 +39,6 @@ void	draw_background(t_map *map)
 {
 	char	*dst;
 
-	// int		rect_x;
-	// int		rect_y;
 	int(x) = 0;
 	int(y) = 0;
 	while (y < SCREEN_HEIGHT)
@@ -57,16 +50,11 @@ void	draw_background(t_map *map)
 						/ 8));
 			if (y < SCREEN_HEIGHT / 2)
 			{
-				// rect_x = x / RECTANGLE_WIDTH;
-				// rect_y = y / RECTANGLE_HEIGHT;
-				// if (rect_x + rect_y % 2 == 0)
-				//	*(unsigned int *)dst = CEILING_COLOR1;
-				// else
-				*(unsigned int *)dst = CEILING_COLOR2;
+				*(unsigned int *)dst = map->color[0];
 			}
 			else
 			{
-				*(unsigned int *)dst = FLOOR_COLOR;
+				*(unsigned int *)dst = map->color[1];
 			}
 			x++;
 		}

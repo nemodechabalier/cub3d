@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:50:16 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/12 13:36:53 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:16:26 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	get_texture_position(t_map *map, t_player *player, int x)
 	double		texPos;
 	int			*color;
 	int			tex_index;
-	//int			sub_texture_x;
 
 	texture = map->game->text;
 	if (player->dda->side == 0)
@@ -56,8 +55,7 @@ void	get_texture_position(t_map *map, t_player *player, int x)
 	wall_x -= floor(wall_x);
 	texture_x = (int)(wall_x * (double)texWidth) % texWidth;
 	line_height = (int)(SCREEN_HEIGHT / map->game->player->dda->perp_wall_dist
-		* 0.8);
-	printf("line height = %d\n\n", line_height);
+		* 0.99);
 	draw_start = -line_height / 2 + SCREEN_HEIGHT / 2;
 	if (draw_start < 0)
 		draw_start = 0;
@@ -70,7 +68,6 @@ void	get_texture_position(t_map *map, t_player *player, int x)
 	while (y < draw_end)
 	{
 		texture_y = (int)texPos & (texHeight - 1);
-		//sub_texture_x = (int)(wall_x * texWidth) % texture->width;
 		color = (int *)(texture->addr[tex_index] + texture_y
 				* texture->line_length + texture_x * (texture->bits_per_pixel
 					/ 8));

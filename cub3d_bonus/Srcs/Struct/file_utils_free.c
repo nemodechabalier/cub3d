@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 19:02:09 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/12/10 17:28:19 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/12 14:01:47 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ t_file	*t_file_creator(void)
 	return (file);
 }
 
-void	t_file_dest(t_file *file)
+void	file_dest(t_file *file)
 {
 	if (file->map)
-		free_strs(file->map);
+		free_strs(file->map,1);
 	if (file->RGB[0])
 		free(file->RGB[0]);
 	if (file->RGB[1])

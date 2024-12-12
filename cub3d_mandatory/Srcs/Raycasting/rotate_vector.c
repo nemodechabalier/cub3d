@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 09:57:35 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/12 13:00:18 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:13:49 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	valid_move(double x, double y, t_map *map)
 	if (grid_x < 0 || grid_x >= map->length || grid_y < 0
 		|| grid_y >= map->height)
 		return (FAIL);
-	// pk ca ne fonction pas avec '1' ?
 	if (map->grid[grid_y][grid_x] == '1')
 	{
 		if ((x - grid_x < MARGE_PLAYER && x - grid_x > 0) || (grid_x + 1
@@ -54,6 +53,7 @@ int	get_table_index(float angle)
 	return (i);
 }
 
+
 int	move_player_dir(t_map *map, t_player *player, int move_forward)
 {
 	double	move_speed;
@@ -65,8 +65,6 @@ int	move_player_dir(t_map *map, t_player *player, int move_forward)
 	move_speed = speed * (move_forward ? 1 : -1);
 	next_pos_x = player->pos_x + player->dir_x * move_speed;
 	next_pos_y = player->pos_y + player->dir_y * move_speed;
-	// printf("Pos de x = %f\nPos de y = %f\n", player->pos_x, player->pos_y);
-	// printf("Next pos de x = %f\nNext pos de y = %f\n",next_pos_x,next_pos_y);
 	if (valid_move(next_pos_x, player->pos_y, map) == SUCCESS)
 		player->pos_x = next_pos_x;
 	else
@@ -95,15 +93,34 @@ void	ft_rotate_player(t_player *player, float rotation_angle,
 	cos_rot = table->cos[rot_index];
 	sin_rot = table->sin[rot_index];
 	player->dir_x = player->dir_x * cos_rot - player->dir_y * sin_rot;
-    //printf("player->dir_x %f: \n", player->dir_x);
 	player->dir_y = old_dir_x * sin_rot + player->dir_y * cos_rot;
-    //printf("player->dir_y %f: \n", player->dir_y);
 	player->plane_x = player->plane_x * cos_rot - player->plane_y * sin_rot;
-    //printf("player->plane_x %f: \n", player->plane_x);
 	player->plane_y = old_plane_x * sin_rot + player->plane_y * cos_rot;
-    //printf("player->plane_y %f: \n", player->plane_y);
 	player->angle += rotation_angle;
-    //printf("player->angle %f: \n\n", player->angle);
+}
+
+void	move_rotate(t_map *map, t_player *player, float rotation_angle, t_calcul_table *table)
+{
+	float	old_dir_x;
+	float	old_plane_x;
+	int		rot_index;
+	float	cos_rot;
+	float	sin_rot;
+	(void)map;
+
+	if (!player || !table)
+		return ;
+	old_dir_x = player->dir_x;
+	old_plane_x = player->plane_x;
+	rot_index = get_table_index(rotation_angle);
+	cos_rot = table->cos[rot_index];
+	sin_rot = table->sin[rot_index];
+	player->dir_x = player->dir_x * cos_rot - player->dir_y * sin_rot;
+	player->dir_y = old_dir_x * sin_rot + player->dir_y * cos_rot;
+	player->plane_x = player->plane_x * cos_rot - player->plane_y * sin_rot;
+	player->plane_y = old_plane_x * sin_rot + player->plane_y * cos_rot;
+	player->angle += rotation_angle;
+	//move_player_dir(map, player, 1);
 }
 
 int	move_player(int keycode, t_map *map)
@@ -111,25 +128,21 @@ int	move_player(int keycode, t_map *map)
 	t_player	*player;
 
 	player = map->game->player;
-	if (!map->game->player->table)
-		return (printf("Error: player->table is NULL\n"), FAIL);
-	if (!map)
-		return (printf("Map init fail\n"), FAIL);
-	if (!map->game)
-		return (printf("Map->game init fail\n"), FAIL);
-	if (!map->game->player)
-		return (printf("Map->game->player init fail\n"), FAIL);
 	if (keycode == 65307)
 		close_window(map);
 	else if ((keycode == 'w' || keycode == 'W') || keycode == 65362)
 		move_player_dir(map, player, 1);
 	else if ((keycode == 's' || keycode == 'S') || keycode == 65364)
 		move_player_dir(map, player, 0);
-	else if ((keycode == 'a' || keycode == 'A') || keycode == 65361)
+	else if (keycode == 65361)
 		ft_rotate_player(player, -0.1f, player->table);
-	else if ((keycode == 'd' || keycode == 'D') || keycode == 65363)
+	else if (keycode == 65363)
 		ft_rotate_player(player, 0.1f, player->table);
-	else 
+	else if ((keycode == 'a' || keycode == 'A'))
+		move_rotate(map, player, -0.2f, player->table);
+	else if ((keycode == 'd' || keycode == 'D'))
+		move_rotate(map, player, 0.2f, player->table);
+	else
 		return (FAIL);
-return (SUCCESS);
+	return (SUCCESS);
 }

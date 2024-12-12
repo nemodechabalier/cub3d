@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:00 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/12/10 17:27:42 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/12 14:52:09 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ int	map_double(t_file *file)
 		}
 		i++;
 	}
-	if (nb != 1)
-		return (printf("Error\ntoo many player"), 1);
+	if (nb > 1)
+		return (printf("Error\ntoo many player\n"), 1);
+	if (nb < 1)
+		return (printf("Error\nno player\n"), 1);
 	return (0);
 }
 
@@ -73,6 +75,5 @@ int	map_verrif(t_file *file)
 		}
 		i++;
 	}
-	printf("map ok :)\n");
 	return (0);
 }

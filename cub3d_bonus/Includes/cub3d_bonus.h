@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:45:42 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/10 17:25:51 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/12 13:56:26 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 # define FLOOR_COLOR 0x101010
 # define RECTANGLE_WIDTH 150
 # define RECTANGLE_HEIGHT 50
+# define MARGE_PLAYER 0.1f
 
 typedef struct s_calcul_table	t_calcul_table;
 typedef struct s_dda			t_dda;
@@ -61,7 +62,7 @@ typedef struct s_player
 	float						plane_x;
 	float						plane_y;
 	double						fov;
-	//double						speed;
+	// double						speed;
 	t_calcul_table				*table;
 	t_dda						*dda;
 }								t_player;
@@ -102,10 +103,6 @@ typedef struct s_texture
 	int							bits_per_pixel;
 	int							line_length;
 	int							endian;
-	//int							north;
-	//int							south;
-	//int							west;
-	//int							est;
 }								t_texture;
 
 typedef struct s_map
@@ -113,6 +110,7 @@ typedef struct s_map
 	char						**grid;
 	char						*addr;
 	void						*img_ptr;
+	int							color[2];
 	int							length;
 	int							height;
 	int							bits_per_pixel;
@@ -130,20 +128,21 @@ typedef struct s_calcul_table
 
 // init
 t_player						*ft_init_player(t_calcul_table *table,
-									t_player *player);
+									t_player *player, char **file);
 t_dda							*ft_init_dda(void);
 t_calcul_table					*ft_init_calcul(t_calcul_table *table);
-t_game							*ft_init_game_data(void);
-t_map							*return_value_file(char **file);
+t_game							*ft_init_game_data(char **file);
+t_map							*return_value_file(char **file, t_file *files);
 t_map							*copy_map(t_map *map, char **file,
-									int file_height, int file_length);
+									int file_height, int file_length,
+									t_file *files);
 t_texture						*ft_init_texture(t_game *game,
 									t_texture *texture);
 
 // dda
 int								start_algo_dda(t_map *map, t_player *player,
 									int x);
-int								init_game(t_map *map);
+int								init_game(t_map *map, t_file *file);
 int								render(t_map *map);
 
 // mlx
@@ -160,4 +159,10 @@ void							draw_minimap(t_map *map, int minimap_size);
 void							ft_free_map(t_map *map);
 int								close_window(t_map *map);
 void							ft_free_data(t_game *game);
+t_texture						*texture_constructor(t_file *file);
+
+int								create_color_ceiling(t_file *file);
+int								create_color_floor(t_file *file);
+void							check_color_recup(t_file *file);
+
 #endif
