@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_utils_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 19:02:09 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/12/12 14:01:47 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/13 19:00:22 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ t_file	*t_file_creator(void)
 	if (!file)
 		return (NULL);
 	file->map = NULL;
-	file->RGB[0] = NULL;
-	file->RGB[1] = NULL;
-	file->RGB[2] = NULL;
+	file->rgb[0] = NULL;
+	file->rgb[1] = NULL;
+	file->rgb[2] = NULL;
 	file->texture[0] = NULL;
 	file->texture[1] = NULL;
 	file->texture[2] = NULL;
@@ -31,14 +31,16 @@ t_file	*t_file_creator(void)
 	return (file);
 }
 
-void	file_dest(t_file *file)
+void	file_dest(t_file *file, int bool)
 {
-	if (file->map)
-		free_strs(file->map,1);
-	if (file->RGB[0])
-		free(file->RGB[0]);
-	if (file->RGB[1])
-		free(file->RGB[1]);
+	if (file->map && bool)
+		free_strs(file->map, 1);
+	else if (file->map)
+		free(file->map);
+	if (file->rgb[0])
+		free(file->rgb[0]);
+	if (file->rgb[1])
+		free(file->rgb[1]);
 	if (file->texture[0])
 		free(file->texture[0]);
 	if (file->texture[1])
@@ -47,6 +49,7 @@ void	file_dest(t_file *file)
 		free(file->texture[2]);
 	if (file->texture[3])
 		free(file->texture[3]);
+	free(file);
 }
 
 void	ft_free_data(t_game *game)

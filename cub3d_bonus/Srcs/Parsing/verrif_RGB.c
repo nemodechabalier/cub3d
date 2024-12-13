@@ -6,27 +6,19 @@
 /*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:02:46 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/12/13 16:15:38 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/12/13 19:01:26 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/cub3d_bonus.h"
 
-char	*RGB_cut(char *str)
+char	*rgb_cut(char *str)
 {
-	int		i;
-	int		nb;
 	char	*new;
 
-	i = 0;
-	nb = 0;
-	while (str[i])
-	{
-		if (str[i] != ' ')
-			nb++;
-		i++;
-	}
-	new = ft_calloc(sizeof(char), (nb + 2));
+	int (i) = 0;
+	int (nb) = 0;
+	new = ft_calloc(sizeof(char), ft_strlen(str) + 1);
 	if (!new)
 		return (NULL);
 	i = 0;
@@ -68,50 +60,50 @@ int	ft_atorgb(const char *str)
 	return (result * sign);
 }
 
-int	RGB_parse(char *RGB)
+int	rgb_parse(char *rgb)
 {
 	int	i;
 
 	i = 2;
-	if (!ft_isdigit(RGB[i]))
+	if (!ft_isdigit(rgb[i]))
 		return (FALSE);
-	while (ft_isdigit(RGB[i]))
+	while (ft_isdigit(rgb[i]))
 		i++;
-	if (RGB[i] != ',')
+	if (rgb[i] != ',')
 		return (FALSE);
 	i++;
-	if (!ft_isdigit(RGB[i]))
+	if (!ft_isdigit(rgb[i]))
 		return (FALSE);
-	while (ft_isdigit(RGB[i]))
+	while (ft_isdigit(rgb[i]))
 		i++;
-	if (RGB[i] != ',')
+	if (rgb[i] != ',')
 		return (FALSE);
 	i++;
-	if (!ft_isdigit(RGB[i]))
+	if (!ft_isdigit(rgb[i]))
 		return (FALSE);
-	while (ft_isdigit(RGB[i]))
+	while (ft_isdigit(rgb[i]))
 		i++;
-	if (RGB[i])
+	if (rgb[i])
 		return (FALSE);
 	return (TRUE);
 }
 
-int	RGB_take(int *FC, char *RGB)
+int	rgb_take(int *FC, char *rgb)
 {
 	int	i;
 
 	i = 0;
-	while (!ft_isdigit(RGB[i]) && RGB[i])
+	while (!ft_isdigit(rgb[i]) && rgb[i])
 		i++;
-	FC[0] = ft_atorgb(RGB + i);
-	while (RGB[i] != ',' && RGB[i])
-		i++;
-	i++;
-	FC[1] = ft_atorgb(RGB + i);
-	while (RGB[i] != ',' && RGB[i])
+	FC[0] = ft_atorgb(rgb + i);
+	while (rgb[i] != ',' && rgb[i])
 		i++;
 	i++;
-	FC[2] = ft_atorgb(RGB + i);
+	FC[1] = ft_atorgb(rgb + i);
+	while (rgb[i] != ',' && rgb[i])
+		i++;
+	i++;
+	FC[2] = ft_atorgb(rgb + i);
 	i = 0;
 	while (i < 3)
 	{
@@ -122,32 +114,31 @@ int	RGB_take(int *FC, char *RGB)
 	return (TRUE);
 }
 
-t_file	*RGB_verrif(t_file *file, char **strs)
+t_file	*rgb_verrif(t_file *file, char **strs)
 {
 	char	*temp;
 
-	(void)strs;
-	file->RGB[0] = RGB_cut(file->RGB[0]);
-	if (!file->RGB[0])
+	file->rgb[0] = rgb_cut(file->rgb[0]);
+	if (!file->rgb[0])
 		return (free_strs(file->texture, 0), free(file), free_strs(strs, 1),
 			NULL);
-	file->RGB[1] = RGB_cut(file->RGB[1]);
-	if (!file->RGB[1])
-		return (free_strs(file->texture, 0), free(file->RGB[0]), free(file),
+	file->rgb[1] = rgb_cut(file->rgb[1]);
+	if (!file->rgb[1])
+		return (free_strs(file->texture, 0), free(file->rgb[0]), free(file),
 			free_strs(strs, 1), NULL);
-	if (!ft_strncmp(file->RGB[0], file->RGB[1], 2)
-		|| RGB_parse(file->RGB[0]) == FALSE || RGB_parse(file->RGB[1]) == FALSE)
-		return (printf("Error\nRGB\n"), file_dest(file, 0), free_strs(strs, 1),
+	if (!ft_strncmp(file->rgb[0], file->rgb[1], 2)
+		|| rgb_parse(file->rgb[0]) == FALSE || rgb_parse(file->rgb[1]) == FALSE)
+		return (printf("Error\nrgb\n"), file_dest(file, 0), free_strs(strs, 1),
 			NULL);
-	if (file->RGB[0][0] == 'C')
+	if (file->rgb[0][0] == 'C')
 	{
-		temp = file->RGB[0];
-		file->RGB[0] = file->RGB[1];
-		file->RGB[1] = temp;
+		temp = file->rgb[0];
+		file->rgb[0] = file->rgb[1];
+		file->rgb[1] = temp;
 	}
-	if (RGB_take(file->F, file->RGB[0]) == FALSE || RGB_take(file->C,
-			file->RGB[1]) == FALSE)
-		return (printf("Error\nRGB value\n"), file_dest(file, 0),
+	if (rgb_take(file->f, file->rgb[0]) == FALSE || rgb_take(file->c,
+			file->rgb[1]) == FALSE)
+		return (printf("Error\nrgb value\n"), file_dest(file, 0),
 			free_strs(strs, 1), NULL);
 	return (free_file(strs), file);
 }

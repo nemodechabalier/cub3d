@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_raycast.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:18:29 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/12 14:00:56 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/13 18:43:01 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ int	init_game(t_map *map, t_file *file)
 		return (FAIL);
 	map->game->text = ft_init_texture(map->game, texture);
 	if (!map->game->text)
-		return (FAIL);
+		return (map->game->text = texture, file_dest(file, 1),
+			close_window(map), FAIL);
+	file_dest(file, 1);
 	mlx_loop_hook(map->game->mlx, &render, map);
 	mlx_hook(map->game->mlx_win, 2, 1, &move_player, map);
 	mlx_hook(map->game->mlx_win, 17, 0, close_window, map);
