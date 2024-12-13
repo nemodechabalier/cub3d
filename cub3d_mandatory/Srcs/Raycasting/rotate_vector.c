@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 09:57:35 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/12 15:13:49 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:05:03 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,30 @@ int	get_table_index(float angle)
 		i += TABLE_SIZE;
 	return (i);
 }
+int	move_player_ad(t_map *map, t_player *player, int move_dir)
+{
+	double	move_speed;
+	double	speed;
+	double	next_pos_x;
+	double	next_pos_y;
 
+	speed = 0.3;
+	if (move_dir == 1)
+		move_speed = speed;
+	else
+		move_speed = -speed;
+	next_pos_x = player->pos_x + player->dir_y * move_speed;
+	next_pos_y = player->pos_y - player->dir_x * move_speed;
+	if (valid_move(next_pos_x, player->pos_y, map) == SUCCESS)
+		player->pos_x = next_pos_x;
+	else
+		return (FAIL);
+	if (valid_move(player->pos_x, next_pos_y, map) == SUCCESS)
+		player->pos_y = next_pos_y;
+	else
+		return (FAIL);
+	return (SUCCESS);
+}
 
 int	move_player_dir(t_map *map, t_player *player, int move_forward)
 {
@@ -62,7 +85,10 @@ int	move_player_dir(t_map *map, t_player *player, int move_forward)
 	double	next_pos_y;
 
 	speed = 0.3;
-	move_speed = speed * (move_forward ? 1 : -1);
+	if (move_forward == 1)
+		move_speed = speed * 1;
+	else
+		move_speed = speed * -1;
 	next_pos_x = player->pos_x + player->dir_x * move_speed;
 	next_pos_y = player->pos_y + player->dir_y * move_speed;
 	if (valid_move(next_pos_x, player->pos_y, map) == SUCCESS)
@@ -119,8 +145,6 @@ void	move_rotate(t_map *map, t_player *player, float rotation_angle, t_calcul_ta
 	player->dir_y = old_dir_x * sin_rot + player->dir_y * cos_rot;
 	player->plane_x = player->plane_x * cos_rot - player->plane_y * sin_rot;
 	player->plane_y = old_plane_x * sin_rot + player->plane_y * cos_rot;
-	player->angle += rotation_angle;
-	//move_player_dir(map, player, 1);
 }
 
 int	move_player(int keycode, t_map *map)
@@ -139,9 +163,9 @@ int	move_player(int keycode, t_map *map)
 	else if (keycode == 65363)
 		ft_rotate_player(player, 0.1f, player->table);
 	else if ((keycode == 'a' || keycode == 'A'))
-		move_rotate(map, player, -0.2f, player->table);
+		move_player_ad(map, player, 1);
 	else if ((keycode == 'd' || keycode == 'D'))
-		move_rotate(map, player, 0.2f, player->table);
+		move_player_ad(map, player, 0);
 	else
 		return (FAIL);
 	return (SUCCESS);
