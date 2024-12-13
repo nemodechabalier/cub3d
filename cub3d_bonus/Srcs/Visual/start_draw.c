@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_draw.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:54:52 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/12 17:53:44 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:45:40 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,11 @@ void	draw_minimap(t_map *map, int minimap_size)
 				color = 0x202020;
 			else if (ft_strchr("NSWE", map->grid[y][x]))
 				color = 0xeb3437;
-			else if (map->grid[y][x] == ' ')
-				color = 0x000000;
-			else
+			if(map->grid[y][x] == '\0')
 				break ;
-			draw_rectangle(map, mini_screen_x, mini_screen_y, color, mini_size);
+			if (ft_strchr("NSWE01", map->grid[y][x]))
+				draw_rectangle(map, mini_screen_x, mini_screen_y, color,
+					mini_size);
 			x++;
 		}
 		y++;

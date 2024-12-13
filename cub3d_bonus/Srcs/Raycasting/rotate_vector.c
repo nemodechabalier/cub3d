@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate_vector.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 09:57:35 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/12 17:39:52 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/13 18:13:17 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 void	render_new_map(t_map *map)
 {
-	char **new_map;
-	int i = 0;
-	new_map = malloc(sizeof(char *) * map->height);
+	char	**new_map;
+	int		i;
+
+	i = 0;
+	new_map = ft_calloc(sizeof(char *) , map->height);
 	if (!new_map)
 		return ;
 	while (i < map->height)
@@ -31,6 +33,7 @@ void	render_new_map(t_map *map)
 		i++;
 	}
 	i = 0;
+	//print_strs(new_map);
 	while (i < map->height)
 	{
 		free(map->grid[i]);
@@ -152,6 +155,32 @@ void	ft_rotate_player(t_player *player, float rotation_angle,
 	player->angle += rotation_angle;
 }
 
+void	new_player(t_map *map)
+{
+	int		i;
+	int		j;
+	char	c;
+
+	i = 0;
+	j = 0;
+	while (map->grid[i])
+	{
+		j = 0;
+		while (map->grid[i][j])
+		{
+			if (ft_strchr("WNSE", map->grid[i][j]))
+			{
+				c = map->grid[i][j];
+				map->grid[i][j] = '0';
+				map->grid[(int)map->game->player->pos_y][(int)map->game->player->pos_x] = c;
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 int	move_player(int keycode, t_map *map)
 {
 	t_player	*player;
@@ -179,5 +208,7 @@ int	move_player(int keycode, t_map *map)
 		open_wall(map);
 	else
 		return (FAIL);
+	new_player(map);
+	draw_minimap(map, 150);
 	return (SUCCESS);
 }
