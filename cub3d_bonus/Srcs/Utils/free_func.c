@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:50:42 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/12/12 14:06:18 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/13 19:04:55 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,13 @@ void	close_texture(t_map *map)
 
 	i = 0;
 	texture = map->game->text;
-	while (i < 2)
+	while (i < 4)
 	{
 		if (texture->img_ptr[i])
 			mlx_destroy_image(map->game->mlx, texture->img_ptr[i]);
 		i++;
 	}
 	free(texture);
-	// free(map->game->text);
 }
 
 void	close_image(t_map *map)
@@ -99,4 +98,3 @@ int	close_window(t_map *map)
 	exit(0);
 	return (0);
 }
-

@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:50:27 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/12/10 17:28:44 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/13 19:04:47 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/cub3d_bonus.h"
 
-void print_strs(char **strs)
+void	print_strs(char **strs)
 {
-	int i ; 
+	int	i;
+
 	i = 0;
 	while (strs[i])
 	{

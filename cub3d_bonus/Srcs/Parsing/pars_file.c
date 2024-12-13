@@ -6,7 +6,7 @@
 /*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 17:44:16 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/12/13 16:19:41 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/12/13 19:03:36 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ t_file	*take_map(char **strs, t_file *file)
 {
 	int	save;
 
-	int(i) = 0;
-	int(j) = 1;
+	int (i) = 0;
+	int (j) = 1;
 	while (strs[i])
 	{
 		if (is_map(strs[i]))
@@ -83,9 +83,9 @@ int	pars_file(char *str)
 
 t_file	*take_texture(t_file *file, char **strs)
 {
-	int(i) = -1;
-	int(j) = 0;
-	int(x) = 0;
+	int (i) = -1;
+	int (j) = 0;
+	int (x) = 0;
 	while (strs[++i])
 	{
 		if (pars_file(strs[i]) == 1)
@@ -99,7 +99,7 @@ t_file	*take_texture(t_file *file, char **strs)
 		{
 			if (x > 1)
 				return (printf("Error\nline: %d\n", i + 1), free(file), NULL);
-			file->RGB[x] = strs[i];
+			file->rgb[x] = strs[i];
 			x++;
 		}
 		else if (is_map(strs[i]) && x == 2 && j == 4)

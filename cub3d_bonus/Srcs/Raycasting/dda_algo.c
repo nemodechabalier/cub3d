@@ -3,20 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   dda_algo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:46:11 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/12 14:48:29 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/13 19:06:27 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/cub3d_bonus.h"
 
-//(Digital Differential Analyzer)
-
-/*
-fabs return absolute value
-*/
 void	calcul_ray_dir(t_player *player, int x)
 {
 	float	camera_x;
@@ -100,7 +95,6 @@ int	start_algo_dda(t_map *map, t_player *player, int x)
 		}
 		if (player->dda->map_x < 0 || player->dda->map_x >= map->length
 			|| player->dda->map_y < 0 || player->dda->map_y >= map->height)
-			// return (printf("Error limit map\n"), 1);
 			return (1);
 		if (map->grid[player->dda->map_y][player->dda->map_x] == '1'
 			|| map->grid[player->dda->map_y][player->dda->map_x] == 'K')

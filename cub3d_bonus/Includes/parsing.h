@@ -6,12 +6,12 @@
 /*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:41:28 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/12/13 16:15:32 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/12/13 19:00:55 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_BONUS_H
-# define PARSING_BONUS_H
+#ifndef PARSING_H
+# define PARSING_H
 
 # include "cub3d_bonus.h"
 
@@ -23,10 +23,10 @@ typedef struct s_img			t_img;
 typedef struct s_file
 {
 	char						*texture[5];
-	char						*RGB[3];
+	char						*rgb[3];
 	char						**map;
-	int							F[3];
-	int							C[3];
+	int							f[3];
+	int							c[3];
 }								t_file;
 
 // pars map && texture
@@ -34,8 +34,8 @@ t_file							*cut_file(char **strs);
 t_file							*verrif_texture(t_file *file, char **strs);
 t_file							*take_file(char *file_name);
 int								map_verrif(t_file *file);
-t_file							*RGB_verrif(t_file *file, char **strs);
-char							*RGB_cut(char *str);
+t_file							*rgb_verrif(t_file *file, char **strs);
+char							*rgb_cut(char *str);
 char							*alloc_texture(char *str);
 
 // struct

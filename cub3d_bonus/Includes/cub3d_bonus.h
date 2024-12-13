@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:45:42 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/12 13:56:26 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/13 19:02:59 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@
 # define SCREEN_HEIGHT 600
 //# define RAD_TO_DEG (180.0 / M_PI) // pour convertir de radian a degres
 # define RAD_TO_DEG (TABLE_SIZE / (2 * M_PI))
-# define DEG_TO_RAD (M_PI / 180.0) // pour convertir de degres a radian
+# define DEG_TO_RAD (M_PI / 180.0) 
+// pour convertir de degres a radian
 # define texWidth 256
 # define texHeight 256
 # define CEILING_COLOR1 0x140A0A
@@ -62,7 +63,6 @@ typedef struct s_player
 	float						plane_x;
 	float						plane_y;
 	double						fov;
-	// double						speed;
 	t_calcul_table				*table;
 	t_dda						*dda;
 }								t_player;

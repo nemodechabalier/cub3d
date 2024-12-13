@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_strcut.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 20:06:17 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/12 14:02:33 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/13 19:06:51 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,12 +170,13 @@ t_dda	*ft_init_dda(void)
 
 t_texture	*texture_constructor(t_file *file)
 {
-	t_texture *text;
+	t_texture	*text;
+	int			i;
 
 	text = malloc(sizeof(t_texture));
 	if (!text)
 		return (NULL);
-	int i = 0;
+	i = 0;
 	while (file->texture[i])
 	{
 		if (file->texture[i][0] == 'N')
@@ -190,4 +191,3 @@ t_texture	*texture_constructor(t_file *file)
 	}
 	return (text);
 }
-

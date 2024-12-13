@@ -6,7 +6,7 @@
 /*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:54:52 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/13 17:45:40 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/12/13 19:06:00 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	draw_minimap(t_map *map, int minimap_size)
 				color = 0x202020;
 			else if (ft_strchr("NSWE", map->grid[y][x]))
 				color = 0xeb3437;
-			if(map->grid[y][x] == '\0')
+			if (map->grid[y][x] == '\0')
 				break ;
 			if (ft_strchr("NSWE01", map->grid[y][x]))
 				draw_rectangle(map, mini_screen_x, mini_screen_y, color,
