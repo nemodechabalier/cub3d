@@ -6,7 +6,7 @@
 /*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 19:02:09 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/12/11 17:52:42 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/12/13 15:33:47 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,12 @@ t_file	*t_file_creator(void)
 	return (file);
 }
 
-void	file_dest(t_file *file)
+void	file_dest(t_file *file, int bool)
 {
-	if (file->map)
-		free_strs(file->map,1);
+	if (file->map && bool)
+		free_strs(file->map, 1);
+	else if (file->map)
+		free(file->map);
 	if (file->RGB[0])
 		free(file->RGB[0]);
 	if (file->RGB[1])
@@ -47,6 +49,7 @@ void	file_dest(t_file *file)
 		free(file->texture[2]);
 	if (file->texture[3])
 		free(file->texture[3]);
+	free(file);
 }
 
 void	ft_free_data(t_game *game)

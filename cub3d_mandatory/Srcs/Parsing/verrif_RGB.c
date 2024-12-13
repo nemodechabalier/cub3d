@@ -6,7 +6,7 @@
 /*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:02:46 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/12/11 18:32:38 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/12/13 15:36:55 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,18 +124,21 @@ int	RGB_take(int *FC, char *RGB)
 
 t_file	*RGB_verrif(t_file *file, char **strs)
 {
+	char	*temp;
+
 	(void)strs;
-	char *temp;
 	file->RGB[0] = RGB_cut(file->RGB[0]);
 	if (!file->RGB[0])
-		return (free_strs(file->texture, 1), free(file), NULL);
+		return (free_strs(file->texture, 0), free(file), free_strs(strs, 1),
+			NULL);
 	file->RGB[1] = RGB_cut(file->RGB[1]);
 	if (!file->RGB[1])
 		return (free_strs(file->texture, 0), free(file->RGB[0]), free(file),
-			NULL);
+			free_strs(strs, 1), NULL);
 	if (!ft_strncmp(file->RGB[0], file->RGB[1], 2)
 		|| RGB_parse(file->RGB[0]) == FALSE || RGB_parse(file->RGB[1]) == FALSE)
-		return (printf("Error\nRGB\n"), file_dest(file), NULL);
+		return (printf("Error\nRGB\n"), file_dest(file, 0), free_strs(strs, 1),
+			NULL);
 	if (file->RGB[0][0] == 'C')
 	{
 		temp = file->RGB[0];
@@ -144,6 +147,7 @@ t_file	*RGB_verrif(t_file *file, char **strs)
 	}
 	if (RGB_take(file->F, file->RGB[0]) == FALSE || RGB_take(file->C,
 			file->RGB[1]) == FALSE)
-		return (printf("Error\nRGB value\n"), file_dest(file), NULL);
-	return (file);
+		return (printf("Error\nRGB value\n"), file_dest(file, 0),
+			free_strs(strs, 1), NULL);
+	return (free_file(strs), file);
 }

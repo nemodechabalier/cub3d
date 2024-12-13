@@ -6,7 +6,7 @@
 /*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:50:42 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/12/11 17:50:05 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:32:38 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,13 @@ void	close_texture(t_map *map)
 
 	i = 0;
 	texture = map->game->text;
-	while (i < 2)
+	while (i < 4)
 	{
 		if (texture->img_ptr[i])
 			mlx_destroy_image(map->game->mlx, texture->img_ptr[i]);
 		i++;
 	}
 	free(texture);
-	// free(map->game->text);
 }
 
 void	close_image(t_map *map)

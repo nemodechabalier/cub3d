@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_img.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:50:16 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/12 15:16:26 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:43:36 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	get_texture_position(t_map *map, t_player *player, int x)
 	wall_x -= floor(wall_x);
 	texture_x = (int)(wall_x * (double)texWidth) % texWidth;
 	line_height = (int)(SCREEN_HEIGHT / map->game->player->dda->perp_wall_dist
-		* 0.99);
+			* 0.99);
 	draw_start = -line_height / 2 + SCREEN_HEIGHT / 2;
 	if (draw_start < 0)
 		draw_start = 0;
@@ -77,6 +77,7 @@ void	get_texture_position(t_map *map, t_player *player, int x)
 	}
 }
 
+
 t_texture	*ft_init_texture(t_game *game, t_texture *texture)
 {
 	int(i) = 0;
@@ -91,8 +92,8 @@ t_texture	*ft_init_texture(t_game *game, t_texture *texture)
 	texture->width = texWidth;
 	while (i < 4)
 	{
-		texture->img_ptr[i] = mlx_xpm_file_to_image(game->mlx, texture->path[i] + 3,
-				&texture->width, &texture->height);
+		texture->img_ptr[i] = mlx_xpm_file_to_image(game->mlx, texture->path[i]
+				+ 3, &texture->width, &texture->height);
 		if (!texture->img_ptr[i])
 			return (printf("Error loading texture %s\n", texture->path[i]),
 				NULL);

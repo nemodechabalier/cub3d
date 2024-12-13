@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_strcut.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 20:06:17 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/12 13:14:01 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:36:51 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,5 +188,9 @@ t_texture	*texture_constructor(t_file *file)
 			text->path[3] = file->texture[i];
 		i++;
 	}
+	text->img_ptr[0] = NULL;
+	text->img_ptr[1] = NULL;
+	text->img_ptr[2] = NULL;
+	text->img_ptr[3] = NULL;
 	return (text);
 }

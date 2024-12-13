@@ -6,7 +6,7 @@
 /*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 17:44:16 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/12/11 18:04:03 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/12/13 15:45:15 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_file	*take_map(char **strs, t_file *file)
 		i++;
 	}
 	if (strs[i] == NULL)
-		return (file_dest(file), NULL);
+		return (file_dest(file, 0), NULL);
 	save = i;
 	while (strs[i])
 	{
@@ -34,11 +34,10 @@ t_file	*take_map(char **strs, t_file *file)
 	}
 	file->map = ft_calloc(sizeof(char *), (j + 1));
 	if (!file->map)
-		return (file_dest(file), NULL);
+		return (file_dest(file,0), NULL);
 	j = 0;
 	while (strs[save])
 		file->map[j++] = strs[save++];
-	// print_strs(file->map);
 	return (file);
 }
 

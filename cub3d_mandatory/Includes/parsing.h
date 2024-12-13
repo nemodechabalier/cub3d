@@ -6,7 +6,7 @@
 /*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:41:28 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/12/11 18:05:28 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/12/13 15:31:56 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char							*alloc_texture(char *str);
 
 // struct
 t_file							*t_file_creator(void);
-void							file_dest(t_file *file);
+void							file_dest(t_file *file, int bool);
 
 // utils
 int								is_map(char *str);

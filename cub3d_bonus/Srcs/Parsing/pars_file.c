@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 17:44:16 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/12/12 13:57:51 by clmanouk         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:19:41 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_file	*take_map(char **strs, t_file *file)
 		i++;
 	}
 	if (strs[i] == NULL)
-		return (file_dest(file), NULL);
+		return (file_dest(file, 0), NULL);
 	save = i;
 	while (strs[i])
 	{
@@ -34,11 +34,10 @@ t_file	*take_map(char **strs, t_file *file)
 	}
 	file->map = ft_calloc(sizeof(char *), (j + 1));
 	if (!file->map)
-		return (file_dest(file), NULL);
+		return (file_dest(file, 0), NULL);
 	j = 0;
 	while (strs[save])
 		file->map[j++] = strs[save++];
-	// print_strs(file->map);
 	return (file);
 }
 
@@ -117,12 +116,12 @@ t_file	*cut_file(char **strs)
 
 	file = t_file_creator();
 	if (!file)
-		return (free_strs(strs,1), NULL);
+		return (free_strs(strs, 1), NULL);
 	file = take_texture(file, strs);
 	if (!file)
-		return (free_strs(strs,1), NULL);
+		return (free_strs(strs, 1), NULL);
 	file = take_map(strs, file);
 	if (!file)
-		return (free_strs(strs,1), NULL);
-	return(verrif_texture(file, strs));
+		return (free_strs(strs, 1), NULL);
+	return (verrif_texture(file, strs));
 }
