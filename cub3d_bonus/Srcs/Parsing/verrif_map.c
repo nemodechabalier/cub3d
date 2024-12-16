@@ -6,7 +6,7 @@
 /*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:00 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/12/13 18:36:41 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/12/16 14:58:17 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	map_char(char **map, int i, int j)
 	size = 0;
 	while (map[size])
 		size++;
-	if (i == 0 || i == size - 1 || j == 0 || j == (int)ft_strlen(map[i])
+	if (i == 0 || i == size - 1 || j == 0 || j == (int)ft_strlen(map[i]) - 1
 		|| j >= (int)ft_strlen(map[i - 1]) || j >= (int)ft_strlen(map[i + 1]))
 		return (ft_printf("Error\nmap uncorrect"), 1);
 	if (map[i + 1][j] == ' ' || map[i - 1][j] == ' ' || map[i][j + 1] == ' '
@@ -69,7 +69,8 @@ int	map_verrif(t_file *file)
 		j = 0;
 		while (file->map[i][j])
 		{
-			if (file->map[i][j] == '0' && map_char(file->map, i, j))
+			if (ft_strchr("0WSEN", file->map[i][j]) && map_char(file->map, i,
+					j))
 				return (1);
 			j++;
 		}
