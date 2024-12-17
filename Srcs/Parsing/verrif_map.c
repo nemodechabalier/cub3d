@@ -6,7 +6,7 @@
 /*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:00 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/12/16 17:11:50 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/12/17 16:21:03 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	map_double(t_file *file)
 		while (file->map[i][j])
 		{
 			if (!ft_strchr("N SEW01", file->map[i][j]))
-				return (printf("Error\nmaps forbiden char"), 1);
+				return (printf("Error\nmaps forbiden char\n"), 1);
 			if (ft_strchr("NSEW", file->map[i][j]))
 				nb++;
 			j++;
@@ -49,10 +49,10 @@ int	map_char(char **map, int i, int j)
 		size++;
 	if (i == 0 || i == size - 1 || j == 0 || j == (int)ft_strlen(map[i]) - 1
 		|| j >= (int)ft_strlen(map[i - 1]) || j >= (int)ft_strlen(map[i + 1]))
-		return (ft_printf("Error\nmap uncorrect"), 1);
+		return (ft_printf("Error\nmap incorrect\n"), 1);
 	if (map[i + 1][j] == ' ' || map[i - 1][j] == ' ' || map[i][j + 1] == ' '
 		|| map[i][j - 1] == ' ')
-		return (ft_printf("Error\nmap uncorrect"), 1);
+		return (ft_printf("Error\nmap incorrect\n"), 1);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:48:14 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/12/16 17:11:50 by nde-chab         ###   ########.fr       */
+/*   Updated: 2024/12/17 16:19:27 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,12 @@ t_file	*take_file(char *file_name)
 	int		nb_line;
 
 	if (!file_name_ok(file_name))
-		return (printf("Error\n file name"), NULL);
+		return (printf("Error\nfile name\n"), NULL);
 	nb_line = count_line(file_name);
 	if (nb_line < 9)
 	{
 		if (nb_line != -1)
-			printf("Error\nfile can't be correct need more line");
+			printf("Error\nfile can't be correct need more line\n");
 		return (NULL);
 	}
 	strs = read_file(file_name, nb_line);
