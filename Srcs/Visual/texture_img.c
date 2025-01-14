@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_img.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:50:16 by clmanouk          #+#    #+#             */
-/*   Updated: 2024/12/17 16:21:34 by nde-chab         ###   ########.fr       */
+/*   Updated: 2025/01/14 12:09:27 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	choose_texture(t_player *player, t_texture *tex)
 			tex->tex_index = 0;
 		tex->wall_x = player->pos_y + player->dda->perp_wall_dist
 			* player->dda->ray_dir_y;
-		tex->wall_x -= floor(tex->wall_x);
 	}
 	else
 	{
@@ -36,8 +35,11 @@ void	choose_texture(t_player *player, t_texture *tex)
 			tex->tex_index = 3;
 		tex->wall_x = player->pos_x + player->dda->perp_wall_dist
 			* player->dda->ray_dir_x;
-		tex->wall_x -= floor(tex->wall_x);
 	}
+	tex->wall_x -= floor(tex->wall_x);
+	if ((player->dda->side == 0 && player->dda->ray_dir_x < 0)
+		|| (player->dda->side == 1 && player->dda->ray_dir_y > 0))
+		tex->wall_x = 1 - tex->wall_x;
 }
 
 void	draw_texture(t_map *map, int draw_end, int x, int draw_start)
@@ -62,24 +64,28 @@ void	draw_texture(t_map *map, int draw_end, int x, int draw_start)
 
 void	get_texture_position(t_map *map, t_player *player, int x)
 {
-	t_texture	*texture;
+	t_texture	*tex;
 	int			draw_start;
 	int			draw_end;
 
-	texture = map->game->text;
-	choose_texture(player, texture);
-	texture->texture_x = (int)(texture->wall_x * (double)TEXWIDTH) % TEXWIDTH;
-	texture->line_height = (int)(SCREEN_HEIGHT
+	tex = map->game->text;
+	choose_texture(player, tex);
+	if (tex->wall_x < 0)
+		tex->wall_x = 0;
+	if (tex->wall_x > 1)
+		tex->wall_x = 1;
+	tex->texture_x = (int)(tex->wall_x * (double)TEXWIDTH) % TEXWIDTH;
+	tex->line_height = (int)(SCREEN_HEIGHT
 			/ map->game->player->dda->perp_wall_dist * 0.99);
-	draw_start = -texture->line_height / 2 + SCREEN_HEIGHT / 2;
+	draw_start = -tex->line_height / 2 + SCREEN_HEIGHT / 2;
 	if (draw_start < 0)
 		draw_start = 0;
-	draw_end = texture->line_height / 2 + SCREEN_HEIGHT / 2;
+	draw_end = tex->line_height / 2 + SCREEN_HEIGHT / 2;
 	if (draw_end > SCREEN_HEIGHT)
 		draw_end = SCREEN_HEIGHT;
-	texture->step = 1.0 * TEXHEIGHT / texture->line_height;
-	texture->texpos = (draw_start - SCREEN_HEIGHT / 2 + texture->line_height
-			/ 2) * texture->step;
+	tex->step = 1.0 * TEXHEIGHT / tex->line_height;
+	tex->texpos = (draw_start - SCREEN_HEIGHT / 2 + tex->line_height / 2)
+		* tex->step;
 	draw_texture(map, draw_end, x, draw_start);
 }
 
