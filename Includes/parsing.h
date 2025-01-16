@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-chab <nde-chab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:41:28 by nde-chab          #+#    #+#             */
-/*   Updated: 2024/12/16 16:56:59 by clmanouk         ###   ########.fr       */
+/*   Updated: 2025/01/15 15:57:01 by nde-chab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int								map_verrif(t_file *file);
 t_file							*rgb_verrif(t_file *file, char **strs);
 char							*rgb_cut(char *str);
 char							*alloc_texture(char *str);
+int								add_wall(t_file *file);
 
 // struct
 t_file							*t_file_creator(void);

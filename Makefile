@@ -18,10 +18,10 @@ OBJS = $(patsubst $(SRCS_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 # Compiler and flags
 CC = cc
 CFLAGS = -g3 -Wall -Wextra -Werror -I$(INCLUDES_DIR)
-LDFLAGS = -lm -Lmlx_linux -lmlx -lXext -lX11 -lXrandr -lXrender -lz -lXcursor -lXinerama -lXft -DENVIRONMENT 
+LDFLAGS = -lm -Lmlx_linux -lmlx -lXext -lX11 -lXrandr -lXrender -lz -lXcursor -lXinerama -lXft -DENVIRONMENT
 
 # Main executable
-NAME = cub3d
+NAME = cub3D
 
 # Rules
 all: $(NAME)

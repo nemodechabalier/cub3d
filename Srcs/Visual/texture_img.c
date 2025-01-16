@@ -6,7 +6,7 @@
 /*   By: clmanouk <clmanouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:50:16 by clmanouk          #+#    #+#             */
-/*   Updated: 2025/01/14 12:09:27 by clmanouk         ###   ########.fr       */
+/*   Updated: 2025/01/15 13:37:08 by clmanouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	draw_texture(t_map *map, int draw_end, int x, int draw_start)
 	y = draw_start;
 	while (y < draw_end)
 	{
-		texture->texture_y = (int)texture->texpos & (TEXHEIGHT - 1);
+		texture->texture_y = (int)texture->texpos % TEXHEIGHT;
 		color = (int *)(texture->addr[texture->tex_index] + texture->texture_y
 				* texture->line_length + texture->texture_x
 				* (texture->bits_per_pixel / 8));
@@ -105,7 +105,8 @@ t_texture	*ft_init_texture(t_game *game, t_texture *texture)
 	{
 		texture->img_ptr[i] = mlx_xpm_file_to_image(game->mlx, texture->path[i]
 				+ 3, &texture->width, &texture->height);
-		if (!texture->img_ptr[i])
+		if (!texture->img_ptr[i] || texture->width != TEXWIDTH
+			|| texture->height != TEXHEIGHT)
 			return (printf("Error\nloading texture %s\n", texture->path[i]),
 				NULL);
 		texture->addr[i] = mlx_get_data_addr(texture->img_ptr[i],
